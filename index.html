@@ -256,22 +256,26 @@
     color: var(--dark);
   }
 
-  /* ── NAME FIELD ── */
-  .name-row {
+  /* ── CUSTOMER DETAILS ── */
+  .details-row {
     background: var(--card-bg);
     border-radius: 20px;
     padding: 24px 28px;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
   }
-  .name-row label {
+  .details-row label {
     font-family: 'Playfair Display', serif;
     font-size: 1.05rem;
     color: var(--dark);
     display: block;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
-  .name-row input {
+  .details-row input,
+  .details-row textarea {
     width: 100%;
     padding: 12px 18px;
     border: 1.5px solid #F0D9B5;
@@ -282,9 +286,14 @@
     background: var(--cream);
     outline: none;
     transition: border-color 0.2s;
+    resize: none;
   }
-  .name-row input:focus { border-color: var(--orange); }
-  .name-row input::placeholder { color: #C4A46B; }
+  .details-row input:focus,
+  .details-row textarea:focus { border-color: var(--orange); }
+  .details-row input::placeholder,
+  .details-row textarea::placeholder { color: #C4A46B; }
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  @media (max-width: 480px) { .two-col { grid-template-columns: 1fr; } }
 
   /* ── ORDER BUTTON ── */
   .order-btn {
@@ -412,10 +421,22 @@
     </div>
   </div>
 
-  <div class="section-label">Step 3 — Your Name</div>
-  <div class="name-row">
-    <label>What should we call you?</label>
-    <input type="text" id="customerName" placeholder="e.g. Ravi Kumar" maxlength="50"/>
+  <div class="section-label">Step 3 — Your Details</div>
+  <div class="details-row">
+    <div class="two-col">
+      <div>
+        <label>Your Name</label>
+        <input type="text" id="customerName" placeholder="e.g. Ravi Kumar" maxlength="50"/>
+      </div>
+      <div>
+        <label>Phone Number</label>
+        <input type="tel" id="customerPhone" placeholder="e.g. 9876543210" maxlength="15"/>
+      </div>
+    </div>
+    <div>
+      <label>Delivery Address</label>
+      <textarea id="customerAddress" rows="3" placeholder="House No., Street, Area, City, Pincode"></textarea>
+    </div>
   </div>
 
   <div class="summary" id="summary">
@@ -433,8 +454,8 @@
 
 <script>
   // ── CONFIG: Replace with your Bot Token and Chat ID ──
-  const BOT_TOKEN = "8601298792:AAEKGQxIlDhlPcgnWESK7rdNnDiu-aGPmjE";
-  const CHAT_ID   = "8669042491";
+  const BOT_TOKEN = "YOUR_BOT_TOKEN_HERE";
+  const CHAT_ID   = "YOUR_CHAT_ID_HERE";
 
   // ── MANGO DATA ──
   const mangoes = [
@@ -487,26 +508,36 @@
 
   // ── LIVE SUMMARY ──
   document.getElementById("customerName").addEventListener("input", updateSummary);
+  document.getElementById("customerPhone").addEventListener("input", updateSummary);
+  document.getElementById("customerAddress").addEventListener("input", updateSummary);
   function updateSummary() {
-    const name = document.getElementById("customerName").value.trim();
+    const name    = document.getElementById("customerName").value.trim();
+    const phone   = document.getElementById("customerPhone").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
     const summary = document.getElementById("summary");
     const content = document.getElementById("summaryContent");
     if (!selectedMango) { summary.classList.remove("show"); return; }
     summary.classList.add("show");
     content.innerHTML = `
       🥭 <strong>${selectedMango.name}</strong> × ${quantity} mangoes
-      ${name ? `<br>👤 Customer: <strong>${name}</strong>` : ""}
+      ${name    ? `<br>👤 Name: <strong>${name}</strong>`       : ""}
+      ${phone   ? `<br>📞 Phone: <strong>${phone}</strong>`     : ""}
+      ${address ? `<br>📍 Address: <strong>${address}</strong>` : ""}
     `;
   }
 
   // ── PLACE ORDER ──
   async function placeOrder() {
-    const name = document.getElementById("customerName").value.trim();
+    const name    = document.getElementById("customerName").value.trim();
+    const phone   = document.getElementById("customerPhone").value.trim();
+    const address = document.getElementById("customerAddress").value.trim();
 
     if (!selectedMango) { showToast("Please select a mango type!", true); return; }
     if (!name)          { showToast("Please enter your name!", true); return; }
+    if (!phone)         { showToast("Please enter your phone number!", true); return; }
+    if (!address)       { showToast("Please enter your delivery address!", true); return; }
 
-    const now = new Date();
+    const now  = new Date();
     const time = now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
     const date = now.toLocaleDateString("en-IN");
 
@@ -516,6 +547,8 @@
 🏷️ Mango: *${selectedMango.name}*
 📦 Quantity: *${quantity}*
 👤 Customer: *${name}*
+📞 Phone: *${phone}*
+📍 Address: ${address}
 🕐 Time: ${date} at ${time}`;
 
     const btn = document.getElementById("orderBtn");
@@ -554,6 +587,8 @@
     document.querySelectorAll(".mango-card").forEach(c => c.classList.remove("selected"));
     document.getElementById("qtyDisplay").textContent = "1";
     document.getElementById("customerName").value = "";
+    document.getElementById("customerPhone").value = "";
+    document.getElementById("customerAddress").value = "";
     document.getElementById("summary").classList.remove("show");
   }
 
