@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mango Grove — Fresh Mangoes Delivered</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --yellow: #F5C518;
+    --orange: #FF6B2B;
+    --green: #2D6A4F;
+    --cream: #FFF8EE;
+    --dark: #1A1200;
+    --text: #3D2B00;
+    --card-bg: #FFFDF7;
+    --shadow: 0 8px 40px rgba(255,107,43,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── BACKGROUND BLOBS ── */
+  body::before {
+    content: '';
+    position: fixed;
+    top: -120px; right: -120px;
+    width: 480px; height: 480px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #FFD97044 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+  body::after {
+    content: '';
+    position: fixed;
+    bottom: -100px; left: -100px;
+    width: 400px; height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2D6A4F22 0%, transparent 70%);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── HEADER ── */
+  header {
+    position: relative; z-index: 10;
+    padding: 28px 5vw 0;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--green);
+    letter-spacing: -0.5px;
+  }
+  .logo span { color: var(--orange); font-style: italic; }
+  .badge {
+    background: var(--green);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 999px;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; z-index: 1;
+    text-align: center;
+    padding: 60px 5vw 20px;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: #FFD97055;
+    color: var(--orange);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    line-height: 1.15;
+    color: var(--dark);
+    margin-bottom: 16px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--orange);
+  }
+  .hero p {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: #7A5C2E;
+    max-width: 480px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ── DECORATIVE DIVIDER ── */
+  .divider {
+    text-align: center;
+    font-size: 1.6rem;
+    margin: 32px 0 8px;
+    opacity: 0.5;
+    letter-spacing: 12px;
+  }
+
+  /* ── ORDER SECTION ── */
+  .order-section {
+    position: relative; z-index: 1;
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 5vw 80px;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 18px;
+  }
+
+  /* ── MANGO CARDS ── */
+  .mango-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+
+  .mango-card {
+    background: var(--card-bg);
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 22px 14px 18px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    user-select: none;
+  }
+  .mango-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+    border-color: #FFD970;
+  }
+  .mango-card.selected {
+    border-color: var(--orange);
+    background: linear-gradient(135deg, #FFF3E0, #FFF8EE);
+    box-shadow: 0 6px 28px rgba(255,107,43,0.18);
+    transform: translateY(-4px);
+  }
+  .mango-card .emoji {
+    font-size: 2.6rem;
+    display: block;
+    margin-bottom: 10px;
+    transition: transform 0.2s;
+  }
+  .mango-card:hover .emoji,
+  .mango-card.selected .emoji { transform: scale(1.12) rotate(-4deg); }
+  .mango-card .name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .mango-card .origin {
+    font-size: 0.72rem;
+    color: #A07840;
+    font-weight: 300;
+  }
+  .mango-card .price {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--green);
+    background: #E8F5E9;
+    border-radius: 999px;
+    padding: 3px 10px;
+    display: inline-block;
+  }
+  .mango-card.selected .price {
+    background: var(--orange);
+    color: #fff;
+  }
+
+  /* ── QUANTITY ── */
+  .qty-row {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+  .qty-label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--dark);
+  }
+  .qty-label small {
+    display: block;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 300;
+    color: #A07840;
+    margin-top: 2px;
+  }
+  .qty-control {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    background: var(--cream);
+    border-radius: 999px;
+    overflow: hidden;
+    border: 1.5px solid #F0D9B5;
+  }
+  .qty-btn {
+    width: 42px; height: 42px;
+    border: none;
+    background: transparent;
+    font-size: 1.3rem;
+    color: var(--orange);
+    cursor: pointer;
+    font-weight: 700;
+    transition: background 0.15s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .qty-btn:hover { background: #FFD97044; }
+  .qty-display {
+    min-width: 52px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--dark);
+  }
+
+  /* ── NAME FIELD ── */
+  .name-row {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 24px 28px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+    margin-bottom: 28px;
+  }
+  .name-row label {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.05rem;
+    color: var(--dark);
+    display: block;
+    margin-bottom: 12px;
+  }
+  .name-row input {
+    width: 100%;
+    padding: 12px 18px;
+    border: 1.5px solid #F0D9B5;
+    border-radius: 12px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .name-row input:focus { border-color: var(--orange); }
+  .name-row input::placeholder { color: #C4A46B; }
+
+  /* ── ORDER BUTTON ── */
+  .order-btn {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--orange), #FF8C00);
+    color: #fff;
+    border: none;
+    border-radius: 16px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.22s ease;
+    box-shadow: 0 6px 24px rgba(255,107,43,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .order-btn::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  }
+  .order-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(255,107,43,0.45);
+  }
+  .order-btn:active { transform: translateY(0); }
+  .order-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 32px; left: 50%; transform: translateX(-50%) translateY(100px);
+    background: var(--green);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-size: 0.92rem;
+    font-weight: 500;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    transition: transform 0.4s cubic-bezier(0.34,1.56,0.64,1);
+    z-index: 999;
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.error { background: #C62828; }
+
+  /* ── SUMMARY CARD ── */
+  .summary {
+    background: linear-gradient(135deg, #FFF3E0, #FFF8EE);
+    border: 1.5px solid #FFD970;
+    border-radius: 16px;
+    padding: 18px 24px;
+    margin-bottom: 20px;
+    display: none;
+  }
+  .summary.show { display: block; }
+  .summary-title {
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .summary-content {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    color: var(--dark);
+    line-height: 1.6;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero { animation: fadeUp 0.6s ease both; }
+  .order-section { animation: fadeUp 0.6s 0.15s ease both; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .mango-grid { grid-template-columns: repeat(2, 1fr); }
+    .qty-row { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Mango <span>Grove</span></div>
+  <div class="badge">🌿 Farm Fresh</div>
+</header>
+
+<div class="hero">
+  <div class="hero-tag">🥭 Season Special</div>
+  <h1>The Finest Mangoes,<br><em>Delivered Fresh</em></h1>
+  <p>Hand-picked from the orchards. Order directly and we'll deliver to your doorstep.</p>
+</div>
+
+<div class="divider">· · ·</div>
+
+<div class="order-section">
+
+  <div class="section-label">Step 1 — Choose Your Mango</div>
+  <div class="mango-grid" id="mangoGrid">
+    <!-- Cards injected by JS -->
+  </div>
+
+  <div class="section-label">Step 2 — Select Quantity</div>
+  <div class="qty-row">
+    <div class="qty-label">
+      How many mangoes?
+      <small>Minimum order: 1 mango</small>
+    </div>
+    <div class="qty-control">
+      <button class="qty-btn" id="qtyMinus">−</button>
+      <div class="qty-display" id="qtyDisplay">1</div>
+      <button class="qty-btn" id="qtyPlus">+</button>
+    </div>
+  </div>
+
+  <div class="section-label">Step 3 — Your Name</div>
+  <div class="name-row">
+    <label>What should we call you?</label>
+    <input type="text" id="customerName" placeholder="e.g. Ravi Kumar" maxlength="50"/>
+  </div>
+
+  <div class="summary" id="summary">
+    <div class="summary-title">Order Summary</div>
+    <div class="summary-content" id="summaryContent"></div>
+  </div>
+
+  <button class="order-btn" id="orderBtn" onclick="placeOrder()">
+    Place Order 🥭
+  </button>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── CONFIG: Replace with your Bot Token and Chat ID ──
+  const BOT_TOKEN = "8601298792:AAEKGQxIlDhlPcgnWESK7rdNnDiu-aGPmjE";
+  const CHAT_ID   = "8669042491";
+
+  // ── MANGO DATA ──
+  const mangoes = [
+    { id: "alphonso",  name: "Alphonso",  origin: "Ratnagiri, MH",  price: "₹80/pc",  emoji: "🥭" },
+    { id: "kesar",     name: "Kesar",     origin: "Junagadh, GJ",   price: "₹60/pc",  emoji: "🥭" },
+    { id: "dasheri",   name: "Dasheri",   origin: "Lucknow, UP",    price: "₹50/pc",  emoji: "🥭" },
+    { id: "langra",    name: "Langra",    origin: "Varanasi, UP",   price: "₹45/pc",  emoji: "🥭" },
+    { id: "himsagar",  name: "Himsagar", origin: "West Bengal",    price: "₹55/pc",  emoji: "🥭" },
+    { id: "totapuri",  name: "Totapuri",  origin: "Karnataka",      price: "₹35/pc",  emoji: "🥭" },
+  ];
+
+  // ── STATE ──
+  let selectedMango = null;
+  let quantity = 1;
+
+  // ── RENDER MANGO CARDS ──
+  const grid = document.getElementById("mangoGrid");
+  mangoes.forEach(m => {
+    const card = document.createElement("div");
+    card.className = "mango-card";
+    card.id = "card-" + m.id;
+    card.innerHTML = `
+      <span class="emoji">${m.emoji}</span>
+      <div class="name">${m.name}</div>
+      <div class="origin">${m.origin}</div>
+      <div class="price">${m.price}</div>
+    `;
+    card.onclick = () => selectMango(m);
+    grid.appendChild(card);
+  });
+
+  function selectMango(m) {
+    selectedMango = m;
+    document.querySelectorAll(".mango-card").forEach(c => c.classList.remove("selected"));
+    document.getElementById("card-" + m.id).classList.add("selected");
+    updateSummary();
+  }
+
+  // ── QUANTITY CONTROL ──
+  document.getElementById("qtyMinus").onclick = () => {
+    if (quantity > 1) { quantity--; updateQty(); }
+  };
+  document.getElementById("qtyPlus").onclick = () => {
+    if (quantity < 999) { quantity++; updateQty(); }
+  };
+  function updateQty() {
+    document.getElementById("qtyDisplay").textContent = quantity;
+    updateSummary();
+  }
+
+  // ── LIVE SUMMARY ──
+  document.getElementById("customerName").addEventListener("input", updateSummary);
+  function updateSummary() {
+    const name = document.getElementById("customerName").value.trim();
+    const summary = document.getElementById("summary");
+    const content = document.getElementById("summaryContent");
+    if (!selectedMango) { summary.classList.remove("show"); return; }
+    summary.classList.add("show");
+    content.innerHTML = `
+      🥭 <strong>${selectedMango.name}</strong> × ${quantity} mangoes
+      ${name ? `<br>👤 Customer: <strong>${name}</strong>` : ""}
+    `;
+  }
+
+  // ── PLACE ORDER ──
+  async function placeOrder() {
+    const name = document.getElementById("customerName").value.trim();
+
+    if (!selectedMango) { showToast("Please select a mango type!", true); return; }
+    if (!name)          { showToast("Please enter your name!", true); return; }
+
+    const now = new Date();
+    const time = now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
+    const date = now.toLocaleDateString("en-IN");
+
+    const message =
+`🥭 *New Mango Order!*
+
+🏷️ Mango: *${selectedMango.name}*
+📦 Quantity: *${quantity}*
+👤 Customer: *${name}*
+🕐 Time: ${date} at ${time}`;
+
+    const btn = document.getElementById("orderBtn");
+    btn.disabled = true;
+    btn.textContent = "Sending order...";
+
+    try {
+      const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: "Markdown"
+        })
+      });
+      const data = await res.json();
+      if (data.ok) {
+        showToast("✅ Order placed! We'll contact you soon.");
+        resetForm();
+      } else {
+        throw new Error(data.description || "Telegram error");
+      }
+    } catch (err) {
+      showToast("❌ Failed to send order. Try again.", true);
+      console.error(err);
+    } finally {
+      btn.disabled = false;
+      btn.textContent = "Place Order 🥭";
+    }
+  }
+
+  function resetForm() {
+    selectedMango = null;
+    quantity = 1;
+    document.querySelectorAll(".mango-card").forEach(c => c.classList.remove("selected"));
+    document.getElementById("qtyDisplay").textContent = "1";
+    document.getElementById("customerName").value = "";
+    document.getElementById("summary").classList.remove("show");
+  }
+
+  function showToast(msg, isError = false) {
+    const t = document.getElementById("toast");
+    t.textContent = msg;
+    t.className = "toast" + (isError ? " error" : "");
+    requestAnimationFrame(() => t.classList.add("show"));
+    setTimeout(() => t.classList.remove("show"), 3500);
+  }
+</script>
+</body>
+</html>
