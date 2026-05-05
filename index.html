@@ -153,6 +153,7 @@
     transition: all 0.22s ease;
     box-shadow: 0 2px 12px rgba(0,0,0,0.05);
     user-select: none;
+    position: relative;
   }
   .mango-card:hover {
     transform: translateY(-4px);
@@ -163,7 +164,6 @@
     border-color: var(--orange);
     background: linear-gradient(135deg, #FFF3E0, #FFF8EE);
     box-shadow: 0 6px 28px rgba(255,107,43,0.18);
-    transform: translateY(-4px);
   }
   .mango-card .emoji {
     font-size: 2.6rem;
@@ -200,58 +200,38 @@
     color: #fff;
   }
 
-  /* ── QUANTITY ── */
-  .qty-row {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 24px 28px;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
-    margin-bottom: 24px;
-    display: flex;
+  /* ── QUANTITY CONTROLS IN CARD ── */
+  .qty-control-inline {
+    display: none;
     align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .qty-label {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    color: var(--dark);
-  }
-  .qty-label small {
-    display: block;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 300;
-    color: #A07840;
-    margin-top: 2px;
-  }
-  .qty-control {
-    display: flex;
-    align-items: center;
+    justify-content: center;
     gap: 0;
     background: var(--cream);
     border-radius: 999px;
     overflow: hidden;
     border: 1.5px solid #F0D9B5;
+    margin-top: 12px;
   }
-  .qty-btn {
-    width: 42px; height: 42px;
+  .mango-card.selected .qty-control-inline {
+    display: flex;
+  }
+  .qty-btn-inline {
+    width: 36px; height: 36px;
     border: none;
     background: transparent;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: var(--orange);
     cursor: pointer;
     font-weight: 700;
     transition: background 0.15s;
     display: flex; align-items: center; justify-content: center;
   }
-  .qty-btn:hover { background: #FFD97044; }
-  .qty-display {
-    min-width: 52px;
+  .qty-btn-inline:hover { background: #FFD97044; }
+  .qty-display-inline {
+    min-width: 42px;
     text-align: center;
     font-family: 'Playfair Display', serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 700;
     color: var(--dark);
   }
@@ -382,7 +362,6 @@
   /* ── RESPONSIVE ── */
   @media (max-width: 480px) {
     .mango-grid { grid-template-columns: repeat(2, 1fr); }
-    .qty-row { flex-direction: column; align-items: flex-start; }
   }
 </style>
 </head>
@@ -403,25 +382,12 @@
 
 <div class="order-section">
 
-  <div class="section-label">Step 1 — Choose Your Mango</div>
+  <div class="section-label">Step 1 — Choose Your Mangoes</div>
   <div class="mango-grid" id="mangoGrid">
     <!-- Cards injected by JS -->
   </div>
 
-  <div class="section-label">Step 2 — Select Quantity</div>
-  <div class="qty-row">
-    <div class="qty-label">
-      How many mangoes?
-      <small>Minimum order: 1 mango</small>
-    </div>
-    <div class="qty-control">
-      <button class="qty-btn" id="qtyMinus">−</button>
-      <div class="qty-display" id="qtyDisplay">1</div>
-      <button class="qty-btn" id="qtyPlus">+</button>
-    </div>
-  </div>
-
-  <div class="section-label">Step 3 — Your Details</div>
+  <div class="section-label">Step 2 — Your Details</div>
   <div class="details-row">
     <div class="two-col">
       <div>
@@ -459,17 +425,16 @@
 
   // ── MANGO DATA ──
   const mangoes = [
-    { id: "alphonso",  name: "Alphonso",  origin: "Ratnagiri, MH",  price: "₹80/pc",  emoji: "🥭" },
-    { id: "kesar",     name: "Kesar",     origin: "Junagadh, GJ",   price: "₹60/pc",  emoji: "🥭" },
-    { id: "dasheri",   name: "Dasheri",   origin: "Lucknow, UP",    price: "₹50/pc",  emoji: "🥭" },
-    { id: "langra",    name: "Langra",    origin: "Varanasi, UP",   price: "₹45/pc",  emoji: "🥭" },
-    { id: "himsagar",  name: "Himsagar", origin: "West Bengal",    price: "₹55/pc",  emoji: "🥭" },
-    { id: "totapuri",  name: "Totapuri",  origin: "Karnataka",      price: "₹35/pc",  emoji: "🥭" },
+    { id: "alphonso",  name: "Alphonso",  origin: "Ratnagiri, MH",  price: "₹80/pc",  priceNum: 80, emoji: "🥭" },
+    { id: "kesar",     name: "Kesar",     origin: "Junagadh, GJ",   price: "₹60/pc",  priceNum: 60, emoji: "🥭" },
+    { id: "dasheri",   name: "Dasheri",   origin: "Lucknow, UP",    price: "₹50/pc",  priceNum: 50, emoji: "🥭" },
+    { id: "langra",    name: "Langra",    origin: "Varanasi, UP",   price: "₹45/pc",  priceNum: 45, emoji: "🥭" },
+    { id: "himsagar",  name: "Himsagar",  origin: "West Bengal",    price: "₹55/pc",  priceNum: 55, emoji: "🥭" },
+    { id: "totapuri",  name: "Totapuri",  origin: "Karnataka",      price: "₹35/pc",  priceNum: 35, emoji: "🥭" },
   ];
 
-  // ── STATE ──
-  let selectedMango = null;
-  let quantity = 1;
+  // ── STATE: Track selected mangoes with quantities ──
+  const cart = {};
 
   // ── RENDER MANGO CARDS ──
   const grid = document.getElementById("mangoGrid");
@@ -482,44 +447,82 @@
       <div class="name">${m.name}</div>
       <div class="origin">${m.origin}</div>
       <div class="price">${m.price}</div>
+      <div class="qty-control-inline" id="qty-${m.id}">
+        <button class="qty-btn-inline" onclick="decreaseQty('${m.id}')">−</button>
+        <div class="qty-display-inline" id="qty-display-${m.id}">1</div>
+        <button class="qty-btn-inline" onclick="increaseQty('${m.id}')">+</button>
+      </div>
     `;
-    card.onclick = () => selectMango(m);
+    card.onclick = (e) => {
+      // Only toggle selection if clicking the card itself, not the quantity buttons
+      if (!e.target.closest('.qty-control-inline')) {
+        toggleMango(m);
+      }
+    };
     grid.appendChild(card);
   });
 
-  function selectMango(m) {
-    selectedMango = m;
-    document.querySelectorAll(".mango-card").forEach(c => c.classList.remove("selected"));
-    document.getElementById("card-" + m.id).classList.add("selected");
+  function toggleMango(m) {
+    const card = document.getElementById("card-" + m.id);
+    if (cart[m.id]) {
+      // Deselect
+      delete cart[m.id];
+      card.classList.remove("selected");
+    } else {
+      // Select with quantity 1
+      cart[m.id] = { ...m, quantity: 1 };
+      card.classList.add("selected");
+      document.getElementById("qty-display-" + m.id).textContent = "1";
+    }
     updateSummary();
   }
 
-  // ── QUANTITY CONTROL ──
-  document.getElementById("qtyMinus").onclick = () => {
-    if (quantity > 1) { quantity--; updateQty(); }
-  };
-  document.getElementById("qtyPlus").onclick = () => {
-    if (quantity < 999) { quantity++; updateQty(); }
-  };
-  function updateQty() {
-    document.getElementById("qtyDisplay").textContent = quantity;
-    updateSummary();
+  function increaseQty(id) {
+    if (cart[id] && cart[id].quantity < 999) {
+      cart[id].quantity++;
+      document.getElementById("qty-display-" + id).textContent = cart[id].quantity;
+      updateSummary();
+    }
+  }
+
+  function decreaseQty(id) {
+    if (cart[id] && cart[id].quantity > 1) {
+      cart[id].quantity--;
+      document.getElementById("qty-display-" + id).textContent = cart[id].quantity;
+      updateSummary();
+    }
   }
 
   // ── LIVE SUMMARY ──
   document.getElementById("customerName").addEventListener("input", updateSummary);
   document.getElementById("customerPhone").addEventListener("input", updateSummary);
   document.getElementById("customerAddress").addEventListener("input", updateSummary);
+
   function updateSummary() {
     const name    = document.getElementById("customerName").value.trim();
     const phone   = document.getElementById("customerPhone").value.trim();
     const address = document.getElementById("customerAddress").value.trim();
     const summary = document.getElementById("summary");
     const content = document.getElementById("summaryContent");
-    if (!selectedMango) { summary.classList.remove("show"); return; }
+    
+    const selectedItems = Object.values(cart);
+    if (selectedItems.length === 0) { 
+      summary.classList.remove("show"); 
+      return; 
+    }
+    
     summary.classList.add("show");
+    
+    let itemsHTML = selectedItems.map(item => 
+      `🥭 <strong>${item.name}</strong> × ${item.quantity} (${item.price})`
+    ).join('<br>');
+    
+    const totalQty = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = selectedItems.reduce((sum, item) => sum + (item.priceNum * item.quantity), 0);
+    
     content.innerHTML = `
-      🥭 <strong>${selectedMango.name}</strong> × ${quantity} mangoes
+      ${itemsHTML}
+      <br><strong>Total: ${totalQty} mangoes — ₹${totalPrice}</strong>
       ${name    ? `<br>👤 Name: <strong>${name}</strong>`       : ""}
       ${phone   ? `<br>📞 Phone: <strong>${phone}</strong>`     : ""}
       ${address ? `<br>📍 Address: <strong>${address}</strong>` : ""}
@@ -532,7 +535,8 @@
     const phone   = document.getElementById("customerPhone").value.trim();
     const address = document.getElementById("customerAddress").value.trim();
 
-    if (!selectedMango) { showToast("Please select a mango type!", true); return; }
+    const selectedItems = Object.values(cart);
+    if (selectedItems.length === 0) { showToast("Please select at least one mango type!", true); return; }
     if (!name)          { showToast("Please enter your name!", true); return; }
     if (!phone)         { showToast("Please enter your phone number!", true); return; }
     if (!address)       { showToast("Please enter your delivery address!", true); return; }
@@ -541,11 +545,21 @@
     const time = now.toLocaleTimeString("en-IN", { hour: "2-digit", minute: "2-digit" });
     const date = now.toLocaleDateString("en-IN");
 
+    const itemsList = selectedItems.map(item => 
+      `   • ${item.name} × ${item.quantity} (${item.price})`
+    ).join('\n');
+    
+    const totalQty = selectedItems.reduce((sum, item) => sum + item.quantity, 0);
+    const totalPrice = selectedItems.reduce((sum, item) => sum + (item.priceNum * item.quantity), 0);
+
     const message =
 `🥭 *New Mango Order!*
 
-🏷️ Mango: *${selectedMango.name}*
-📦 Quantity: *${quantity}*
+📦 *Order Details:*
+${itemsList}
+
+💰 *Total: ${totalQty} mangoes — ₹${totalPrice}*
+
 👤 Customer: *${name}*
 📞 Phone: *${phone}*
 📍 Address: ${address}
@@ -582,10 +596,13 @@
   }
 
   function resetForm() {
-    selectedMango = null;
-    quantity = 1;
-    document.querySelectorAll(".mango-card").forEach(c => c.classList.remove("selected"));
-    document.getElementById("qtyDisplay").textContent = "1";
+    // Clear cart
+    for (let id in cart) {
+      document.getElementById("card-" + id).classList.remove("selected");
+    }
+    Object.keys(cart).forEach(key => delete cart[key]);
+    
+    // Clear customer details
     document.getElementById("customerName").value = "";
     document.getElementById("customerPhone").value = "";
     document.getElementById("customerAddress").value = "";
