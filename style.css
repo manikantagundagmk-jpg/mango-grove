@@ -1,0 +1,190 @@
+:root {
+  --orange: #ff6b2b;
+  --green: #2d6a4f;
+  --cream: #fff8ee;
+  --dark: #1a1200;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--cream);
+  color: var(--dark);
+}
+
+header {
+  padding: 24px;
+  text-align: center;
+}
+
+.logo {
+  font-size: 2rem;
+  font-family: 'Playfair Display', serif;
+  color: var(--green);
+}
+
+.hero {
+  text-align: center;
+  padding: 20px;
+}
+
+.hero h1 {
+  font-size: 2.8rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.hero p {
+  margin-top: 10px;
+  color: #6f5b3e;
+}
+
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.mango-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+  gap: 20px;
+}
+
+.mango-card {
+  background: white;
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.06);
+  transition: 0.25s;
+}
+
+.mango-card.selected {
+  border: 2px solid var(--orange);
+}
+
+.mango-card.sold-out {
+  opacity: 0.5;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.mango-card:hover {
+  transform: translateY(-5px);
+}
+
+.emoji {
+  font-size: 3rem;
+}
+
+.name {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.origin {
+  margin-top: 5px;
+  color: #777;
+}
+
+.price {
+  margin-top: 14px;
+  display: inline-block;
+  background: #e8f5e9;
+  color: var(--green);
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.stock {
+  margin-top: 12px;
+  color: var(--orange);
+  font-weight: 700;
+}
+
+.qty-control {
+  margin-top: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.qty-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  border: none;
+  background: var(--orange);
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.qty-display {
+  font-weight: 700;
+}
+
+.form-box {
+  margin-top: 40px;
+  background: white;
+  padding: 24px;
+  border-radius: 24px;
+}
+
+input,
+textarea {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  padding: 14px;
+  border-radius: 14px;
+  border: 1px solid #ddd;
+}
+
+.sticky-cart {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(92%, 700px);
+
+  background: linear-gradient(135deg, var(--orange), #ff8c00);
+
+  color: white;
+
+  padding: 18px 24px;
+
+  border-radius: 20px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sticky-cart button {
+  background: white;
+  color: var(--orange);
+  border: none;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--green);
+  color: white;
+  padding: 14px 20px;
+  border-radius: 12px;
+  display: none;
+}
