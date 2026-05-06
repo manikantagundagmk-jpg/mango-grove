@@ -27,15 +27,16 @@ const cart = {};
 // LOAD MANGOES
 // =============================
 
-async function loadMangoes(){
+async function loadMangoes() {
 
   const { data, error } = await supabaseClient
     .from('mango_stock')
     .select('*')
     .eq('is_active', true);
 
-  if(error){
+  if (error) {
     console.error(error);
+    showToast("Failed to load mangoes");
     return;
   }
 
@@ -47,10 +48,10 @@ async function loadMangoes(){
 loadMangoes();
 
 // =============================
-// RENDER
+// RENDER MANGOES
 // =============================
 
-function renderMangoes(){
+function renderMangoes() {
 
   const grid = document.getElementById('mangoGrid');
 
@@ -60,15 +61,17 @@ function renderMangoes(){
 
     const qty = cart[m.id]?.quantity || 0;
 
+    const remainingStock = m.stock_kg - qty;
+
     const card = document.createElement('div');
 
     card.className = 'mango-card';
 
-    if(qty > 0){
+    if (qty > 0) {
       card.classList.add('selected');
     }
 
-    if(m.stock_kg <= 0){
+    if (m.stock_kg <= 0) {
       card.classList.add('sold-out');
     }
 
@@ -86,7 +89,7 @@ function renderMangoes(){
       <div class="stock">
         ${
           m.stock_kg > 0
-          ? `Available: ${m.stock_kg} KG`
+          ? `Available: ${remainingStock} KG`
           : 'SOLD OUT'
         }
       </div>
@@ -102,8 +105,11 @@ function renderMangoes(){
           ${qty} KG
         </div>
 
-        <button class="qty-btn"
-          onclick="increaseQty('${m.id}')">
+        <button
+          class="qty-btn"
+          onclick="increaseQty('${m.id}')"
+          ${qty >= m.stock_kg ? 'disabled' : ''}
+        >
           +
         </button>
 
@@ -117,22 +123,32 @@ function renderMangoes(){
 }
 
 // =============================
-// INCREASE
+// INCREASE QTY
 // =============================
 
-function increaseQty(id){
+function increaseQty(id) {
 
   const mango = mangoes.find(m => m.id === id);
 
-  if(!cart[id]){
+  if (!mango) return;
+
+  // create cart item if not exists
+  if (!cart[id]) {
     cart[id] = {
       ...mango,
       quantity: 0
     };
   }
 
-  if(cart[id].quantity >= mango.stock_kg){
-    showToast("Stock limit reached");
+  const currentQty = cart[id].quantity;
+
+  // HARD LIMIT CHECK
+  if (currentQty >= mango.stock_kg) {
+
+    showToast(
+      `Only ${mango.stock_kg} KG available`
+    );
+
     return;
   }
 
@@ -142,16 +158,16 @@ function increaseQty(id){
 }
 
 // =============================
-// DECREASE
+// DECREASE QTY
 // =============================
 
-function decreaseQty(id){
+function decreaseQty(id) {
 
-  if(!cart[id]) return;
+  if (!cart[id]) return;
 
   cart[id].quantity--;
 
-  if(cart[id].quantity <= 0){
+  if (cart[id].quantity <= 0) {
     delete cart[id];
   }
 
@@ -159,10 +175,10 @@ function decreaseQty(id){
 }
 
 // =============================
-// UPDATE CART
+// UPDATE CART UI
 // =============================
 
-function updateCartUI(){
+function updateCartUI() {
 
   const items = Object.values(cart);
 
@@ -185,30 +201,70 @@ function updateCartUI(){
 // PLACE ORDER
 // =============================
 
-async function placeOrder(){
+async function placeOrder() {
 
   const name =
     document.getElementById('customerName')
-    .value.trim();
+      .value.trim();
 
   const phone =
     document.getElementById('customerPhone')
-    .value.trim();
+      .value.trim();
 
   const address =
     document.getElementById('customerAddress')
-    .value.trim();
+      .value.trim();
 
   const items = Object.values(cart);
 
-  if(items.length === 0){
+  if (items.length === 0) {
     showToast("Add mangoes first");
     return;
   }
 
-  if(!name || !phone || !address){
+  if (!name || !phone || !address) {
     showToast("Fill all details");
     return;
+  }
+
+  // =============================
+  // FINAL STOCK VALIDATION
+  // =============================
+
+  const { data: latestStock, error: stockError } =
+    await supabaseClient
+      .from('mango_stock')
+      .select('*');
+
+  if (stockError) {
+    console.error(stockError);
+    showToast("Stock validation failed");
+    return;
+  }
+
+  // verify each item stock
+  for (const item of items) {
+
+    const latest = latestStock.find(
+      m => m.id === item.id
+    );
+
+    if (!latest) {
+      showToast(`${item.name} unavailable`);
+      return;
+    }
+
+    if (item.quantity > latest.stock_kg) {
+
+      showToast(
+        `${item.name} only has ${latest.stock_kg} KG left`
+      );
+
+      // refresh latest stock
+      loadMangoes();
+
+      return;
+    }
   }
 
   const totalKg = items.reduce(
@@ -237,7 +293,7 @@ async function placeOrder(){
       total_price: totalPrice
     });
 
-  if(error){
+  if (error) {
     console.error(error);
     showToast("Order failed");
     return;
@@ -247,13 +303,14 @@ async function placeOrder(){
   // UPDATE STOCK
   // =============================
 
-  for(const item of items){
+  for (const item of items) {
 
-    const mango =
-      mangoes.find(m => m.id === item.id);
+    const latest = latestStock.find(
+      m => m.id === item.id
+    );
 
     const newStock =
-      mango.stock_kg - item.quantity;
+      latest.stock_kg - item.quantity;
 
     await supabaseClient
       .from('mango_stock')
@@ -269,7 +326,7 @@ async function placeOrder(){
 
   const itemsText = items.map(item =>
     `• ${item.name} × ${item.quantity} KG`
-  ).join('\\n');
+  ).join('\n');
 
   const telegramMessage = `
 🥭 New Mango Order
@@ -301,9 +358,13 @@ ${itemsText}
       }
     );
 
-  } catch(err){
+  } catch (err) {
     console.error(err);
   }
+
+  // =============================
+  // RESET
+  // =============================
 
   showToast("Order placed successfully");
 
@@ -320,7 +381,7 @@ ${itemsText}
 // TOAST
 // =============================
 
-function showToast(msg){
+function showToast(msg) {
 
   const toast =
     document.getElementById('toast');
