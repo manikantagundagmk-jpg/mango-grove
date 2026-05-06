@@ -2,8 +2,8 @@
 // SUPABASE CONFIG
 // =============================
 
-const SUPABASE_URL = "PASTE_SUPABASE_URL";
-const SUPABASE_KEY = "PASTE_SUPABASE_ANON_KEY";
+const SUPABASE_URL = "https://yqjmrgutfcnqbfmprbix.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inlxam1yZ3V0ZmNucWJmbXByYml4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzgwODE2MTYsImV4cCI6MjA5MzY1NzYxNn0.uuQASHyr-EOLTnYabvA3Qua2wrsYaFNZSNEZv_p-qOA";
 
 const supabaseClient = supabase.createClient(
   SUPABASE_URL,
@@ -14,8 +14,8 @@ const supabaseClient = supabase.createClient(
 // TELEGRAM CONFIG
 // =============================
 
-const BOT_TOKEN = "PASTE_TELEGRAM_BOT_TOKEN";
-const CHAT_ID = "PASTE_CHAT_ID";
+const BOT_TOKEN = "8601298792:AAEKGQxIlDhlPcgnWESK7rdNnDiu-aGPmjE";
+const CHAT_ID = "8669042491";
 
 // =============================
 
