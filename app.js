@@ -108,7 +108,7 @@ function renderMangoes() {
         <button
           class="qty-btn"
           onclick="increaseQty('${m.id}')"
-          ${qty >= m.stock_kg ? 'disabled' : ''}
+          ${qty + 5 > m.stock_kg ? 'disabled' : ''}
         >
           +
         </button>
@@ -125,35 +125,22 @@ function renderMangoes() {
 // =============================
 // INCREASE QTY
 // =============================
-
 function increaseQty(id) {
-
   const mango = mangoes.find(m => m.id === id);
-
   if (!mango) return;
 
-  // create cart item if not exists
   if (!cart[id]) {
-    cart[id] = {
-      ...mango,
-      quantity: 0
-    };
+    cart[id] = { ...mango, quantity: 0 };
   }
 
   const currentQty = cart[id].quantity;
 
-  // HARD LIMIT CHECK
-  if (currentQty >= mango.stock_kg) {
-
-    showToast(
-      `Only ${mango.stock_kg} KG available`
-    );
-
+  if (currentQty + 5 > mango.stock_kg) {
+    showToast(`Only ${mango.stock_kg} KG available`);
     return;
   }
 
-  cart[id].quantity++;
-
+  cart[id].quantity += 5;
   renderMangoes();
 }
 
@@ -162,10 +149,9 @@ function increaseQty(id) {
 // =============================
 
 function decreaseQty(id) {
-
   if (!cart[id]) return;
 
-  cart[id].quantity--;
+  cart[id].quantity -= 5;
 
   if (cart[id].quantity <= 0) {
     delete cart[id];
