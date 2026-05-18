@@ -1,9 +1,8 @@
 /* =============================================
-   Mango Grove — style.css
-   Premium Responsive Version
+   Mango Grove — Premium Responsive UI
 ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
 
 /* ─────────────────────────────────────────────
    RESET
@@ -20,8 +19,10 @@
    ROOT VARIABLES
 ───────────────────────────────────────────── */
 :root {
+
   --maroon: #5C1A1A;
   --terra: #D4956A;
+
   --cream: #F5EDD8;
   --cream-soft: #FDF5E8;
 
@@ -36,55 +37,70 @@
    BASE
 ───────────────────────────────────────────── */
 body {
+
   font-family: 'DM Sans', sans-serif;
+
   background: var(--cream);
   color: var(--maroon);
+
   min-height: 100vh;
-  padding: 24px;
+
+  padding: 20px;
 }
 
 /* ─────────────────────────────────────────────
-   WRAPPER
+   MAIN WRAPPER
 ───────────────────────────────────────────── */
 .pg-wrap {
-  width: min(100%, 1100px);
+
+  width: calc(100% - 40px);
+  max-width: 1400px;
+
   margin: 0 auto;
 
   background: var(--cream);
 
   border: 1px solid var(--terra-40);
-  border-radius: 22px;
+  border-radius: 24px;
 
   overflow: hidden;
 
-  box-shadow: 0 10px 50px rgba(92, 26, 26, 0.10);
+  box-shadow:
+    0 10px 50px rgba(92, 26, 26, 0.10);
 }
 
 /* ─────────────────────────────────────────────
    HEADER
 ───────────────────────────────────────────── */
 .pg-header {
+
   background: var(--cream);
 
-  padding: 18px 28px;
+  padding: 18px 32px;
 
   display: flex;
-  justify-content: flex-start;   /* LOGO LEFT */
+  justify-content: flex-start;
   align-items: center;
 
   border-bottom: 1px solid var(--terra-50);
 }
 
+/* LOGO */
 .pg-logo {
-  height: 56px;
+
+  height: 70px;
   width: auto;
+
   object-fit: contain;
 }
 
 .pg-logo-fallback {
+
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
+
+  font-size: 24px;
   font-weight: 800;
+
   color: var(--maroon);
 }
 
@@ -92,18 +108,24 @@ body {
    HERO
 ───────────────────────────────────────────── */
 .pg-hero {
+
   background: var(--maroon);
 
   text-align: center;
 
-  padding: 70px 30px;
+  padding: 80px 30px;
 }
 
 .pg-hero-badge {
+
   display: inline-block;
 
   background: var(--terra);
   color: var(--maroon);
+
+  padding: 8px 18px;
+
+  border-radius: 999px;
 
   font-size: 12px;
   font-weight: 700;
@@ -111,17 +133,14 @@ body {
   letter-spacing: 2px;
   text-transform: uppercase;
 
-  padding: 8px 18px;
-
-  border-radius: 999px;
-
   margin-bottom: 24px;
 }
 
 .pg-hero h1 {
+
   font-family: 'Playfair Display', serif;
 
-  font-size: clamp(38px, 5vw, 62px);
+  font-size: clamp(42px, 5vw, 72px);
   font-weight: 800;
 
   line-height: 1.08;
@@ -136,19 +155,24 @@ body {
 }
 
 .pg-hero p {
+
   font-size: 18px;
-  color: rgba(212, 149, 106, 0.72);
+
+  color: rgba(212, 149, 106, 0.70);
 }
 
 /* ─────────────────────────────────────────────
    BODY
 ───────────────────────────────────────────── */
 .pg-body {
+
   background: var(--cream);
-  padding: 28px;
+
+  padding: 34px;
 }
 
 .pg-section-title {
+
   font-size: 14px;
   font-weight: 700;
 
@@ -157,27 +181,29 @@ body {
 
   color: var(--maroon-60);
 
-  margin-bottom: 20px;
+  margin-bottom: 22px;
 }
 
 /* ─────────────────────────────────────────────
    GRID
 ───────────────────────────────────────────── */
 .pg-grid {
+
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(260px, 1fr));
+    repeat(auto-fit, minmax(320px, 1fr));
 
-  gap: 18px;
+  gap: 22px;
 
-  margin-bottom: 32px;
+  margin-bottom: 36px;
 }
 
 /* ─────────────────────────────────────────────
    CARD
 ───────────────────────────────────────────── */
 .mango-card {
+
   background: #ffffff;
 
   border: 1px solid var(--terra-50);
@@ -188,7 +214,7 @@ body {
   display: flex;
   flex-direction: column;
 
-  min-height: 290px;
+  min-height: 340px;
 
   transition:
     transform 0.25s ease,
@@ -197,10 +223,11 @@ body {
 }
 
 .mango-card:hover:not(.sold-out) {
+
   transform: translateY(-5px);
 
   box-shadow:
-    0 8px 25px rgba(92, 26, 26, 0.10);
+    0 10px 25px rgba(92, 26, 26, 0.10);
 }
 
 .mango-card.selected {
@@ -208,8 +235,11 @@ body {
 }
 
 .mango-card.sold-out {
+
   opacity: 0.45;
+
   filter: grayscale(1);
+
   pointer-events: none;
 }
 
@@ -217,9 +247,10 @@ body {
    CARD TOP
 ───────────────────────────────────────────── */
 .pg-card-top {
+
   background: var(--cream-soft);
 
-  height: 110px;
+  height: 120px;
 
   display: flex;
   align-items: center;
@@ -229,7 +260,9 @@ body {
 }
 
 .pg-card-top .emoji {
-  font-size: 54px;
+
+  font-size: 58px;
+
   line-height: 1;
 }
 
@@ -237,7 +270,8 @@ body {
    CARD BOTTOM
 ───────────────────────────────────────────── */
 .pg-card-bot {
-  padding: 18px;
+
+  padding: 20px;
 
   display: flex;
   flex-direction: column;
@@ -246,7 +280,8 @@ body {
 }
 
 .pg-card-name {
-  font-size: 24px;
+
+  font-size: 26px;
   font-weight: 700;
 
   color: var(--maroon);
@@ -255,68 +290,76 @@ body {
 }
 
 .pg-card-origin {
-  font-size: 14px;
+
+  font-size: 15px;
+
   color: var(--maroon-60);
 
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
 .pg-card-price {
+
   display: inline-block;
   align-self: flex-start;
 
   background: var(--maroon);
   color: var(--cream);
 
-  font-size: 14px;
-  font-weight: 700;
-
-  padding: 7px 12px;
+  padding: 8px 14px;
 
   border-radius: 10px;
 
-  margin-bottom: 14px;
+  font-size: 15px;
+  font-weight: 700;
+
+  margin-bottom: 16px;
 }
 
 .pg-card-stock {
+
   font-size: 14px;
   font-weight: 600;
 
   color: var(--terra);
 
-  margin-bottom: 14px;
+  margin-bottom: 16px;
 }
 
+/* SOLD OUT BADGE */
 .soldout-badge {
+
   display: inline-block;
 
   background: var(--maroon-20);
   color: var(--maroon-60);
 
-  font-size: 12px;
-  font-weight: 700;
-
-  padding: 6px 10px;
+  padding: 6px 12px;
 
   border-radius: 8px;
+
+  font-size: 12px;
+  font-weight: 700;
 }
 
 /* ─────────────────────────────────────────────
    QUANTITY CONTROLS
 ───────────────────────────────────────────── */
 .qty-control {
+
   display: flex;
   align-items: center;
   justify-content: space-between;
 
   margin-top: auto;
 
-  padding-top: 14px;
+  padding-top: 16px;
 }
 
 .qty-btn {
-  width: 42px;
-  height: 42px;
+
+  width: 44px;
+  height: 44px;
 
   border-radius: 50%;
   border: none;
@@ -324,7 +367,7 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  font-size: 22px;
+  font-size: 24px;
   font-weight: 700;
 
   display: flex;
@@ -334,8 +377,8 @@ body {
   cursor: pointer;
 
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .qty-btn:hover {
@@ -347,7 +390,8 @@ body {
 }
 
 .qty-display {
-  font-size: 18px;
+
+  font-size: 20px;
   font-weight: 700;
 
   color: var(--maroon);
@@ -357,20 +401,22 @@ body {
    FORM
 ───────────────────────────────────────────── */
 .pg-form {
+
   background: #fcfcfc;
 
   border: 1px solid var(--terra-40);
   border-radius: 24px;
 
-  padding: 28px;
+  padding: 30px;
 
-  margin-bottom: 100px;
+  margin-bottom: 110px;
 }
 
 .pg-form h2 {
+
   font-family: 'Playfair Display', serif;
 
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 800;
 
   color: var(--maroon);
@@ -379,9 +425,10 @@ body {
 }
 
 .pg-input {
+
   width: 100%;
 
-  padding: 16px 18px;
+  padding: 18px 18px;
 
   border: 1px solid rgba(212, 149, 106, 0.60);
   border-radius: 14px;
@@ -390,7 +437,7 @@ body {
 
   color: var(--maroon);
 
-  font-size: 15px;
+  font-size: 16px;
   font-family: 'DM Sans', sans-serif;
 
   margin-bottom: 16px;
@@ -407,7 +454,9 @@ body {
 }
 
 .pg-input:focus {
+
   border-color: var(--terra);
+
   background: #fff;
 }
 
@@ -415,26 +464,28 @@ body {
    STICKY CART
 ───────────────────────────────────────────── */
 .pg-cart {
+
   position: sticky;
   bottom: 0;
 
   background: var(--maroon);
 
-  padding: 18px 28px;
+  padding: 22px 30px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 0 0 22px 22px;
+  border-radius: 0 0 24px 24px;
 
-  z-index: 50;
+  z-index: 100;
 }
 
 .pg-cart-txt {
+
   color: var(--terra);
 
-  font-size: 20px;
+  font-size: 22px;
   font-weight: 700;
 }
 
@@ -443,27 +494,29 @@ body {
 }
 
 .pg-cart-btn {
+
   background: var(--terra);
   color: var(--maroon);
 
   border: none;
   border-radius: 14px;
 
-  padding: 14px 26px;
+  padding: 16px 30px;
 
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+
+  font-size: 16px;
   font-weight: 700;
 
   cursor: pointer;
 
   transition:
-    opacity 0.2s ease,
-    transform 0.2s ease;
+    transform 0.2s ease,
+    opacity 0.2s ease;
 }
 
 .pg-cart-btn:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
 }
 
 .pg-cart-btn:active {
@@ -474,6 +527,7 @@ body {
    TOAST
 ───────────────────────────────────────────── */
 .toast {
+
   position: fixed;
 
   top: 24px;
@@ -500,20 +554,65 @@ body {
 }
 
 /* ─────────────────────────────────────────────
-   RESPONSIVE
+   TABLET
 ───────────────────────────────────────────── */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
 
-  body {
-    padding: 12px;
+  .pg-wrap {
+    width: calc(100% - 20px);
   }
 
-  .pg-body {
-    padding: 18px;
+  .pg-grid {
+
+    grid-template-columns:
+      repeat(auto-fit, minmax(240px, 1fr));
   }
 
   .pg-hero {
-    padding: 50px 20px;
+    padding: 60px 24px;
+  }
+
+  .pg-body {
+    padding: 24px;
+  }
+
+  .pg-card-name {
+    font-size: 22px;
+  }
+}
+
+/* ─────────────────────────────────────────────
+   MOBILE
+───────────────────────────────────────────── */
+@media (max-width: 600px) {
+
+  body {
+    padding: 8px;
+  }
+
+  .pg-wrap {
+
+    width: 100%;
+
+    border-radius: 16px;
+  }
+
+  .pg-header {
+    padding: 16px 20px;
+  }
+
+  .pg-logo {
+    height: 56px;
+  }
+
+  .pg-hero {
+
+    padding: 46px 20px;
+  }
+
+  .pg-hero h1 {
+
+    font-size: 40px;
   }
 
   .pg-hero p {
@@ -521,57 +620,43 @@ body {
   }
 
   .pg-grid {
-    grid-template-columns:
-      repeat(auto-fit, minmax(220px, 1fr));
+
+    grid-template-columns: 1fr;
   }
 
-  .pg-card-name {
-    font-size: 20px;
+  .mango-card {
+
+    min-height: 300px;
+  }
+
+  .pg-form {
+
+    padding: 22px;
   }
 
   .pg-form h2 {
+
     font-size: 28px;
   }
 
   .pg-cart {
-    padding: 16px 18px;
+
+    flex-direction: column;
+    gap: 14px;
+
+    align-items: stretch;
+
+    padding: 18px;
+  }
+
+  .pg-cart-btn {
+
+    width: 100%;
   }
 
   .pg-cart-txt {
-    font-size: 16px;
-  }
 
-  .pg-cart-btn {
-    padding: 12px 18px;
-    font-size: 14px;
-  }
-}
-
-@media (max-width: 520px) {
-
-  .pg-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .pg-hero h1 {
-    font-size: 38px;
-  }
-
-  .pg-form {
-    padding: 20px;
-  }
-
-  .pg-form h2 {
-    font-size: 24px;
-  }
-
-  .pg-cart {
-    flex-direction: column;
-    gap: 14px;
-    align-items: stretch;
-  }
-
-  .pg-cart-btn {
-    width: 100%;
+    text-align: center;
+    font-size: 18px;
   }
 }
