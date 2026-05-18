@@ -1,56 +1,76 @@
 /* =============================================
    Mango Grove — style.css
    Palette: Maroon #5C1A1A · Terracotta #D4956A · Cream #F5EDD8
-   ============================================= */
+============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;600&display=swap');
 
-/* ── Reset ── */
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-/* ── Root tokens ── */
-:root {
-  --maroon:     #5C1A1A;
-  --terra:      #D4956A;
-  --cream:      #F5EDD8;
-  --cream-soft: #FDF5E8;
-  --maroon-60:  rgba(92,26,26,0.60);
-  --maroon-20:  rgba(92,26,26,0.20);
-  --terra-50:   rgba(212,149,106,0.50);
-  --terra-40:   rgba(212,149,106,0.40);
+/* ─────────────────────────────────────────────
+   RESET
+───────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* ── Base ── */
+/* ─────────────────────────────────────────────
+   ROOT VARIABLES
+───────────────────────────────────────────── */
+:root {
+  --maroon: #5C1A1A;
+  --terra: #D4956A;
+  --cream: #F5EDD8;
+  --cream-soft: #FDF5E8;
+
+  --maroon-60: rgba(92, 26, 26, 0.60);
+  --maroon-20: rgba(92, 26, 26, 0.20);
+
+  --terra-50: rgba(212, 149, 106, 0.50);
+  --terra-40: rgba(212, 149, 106, 0.40);
+}
+
+/* ─────────────────────────────────────────────
+   BASE
+───────────────────────────────────────────── */
 body {
   font-family: 'DM Sans', sans-serif;
   background: var(--cream);
   color: var(--maroon);
   min-height: 100vh;
+  padding: 20px 0;
 }
 
-/* ══════════════════════════════════════════
+/* ─────────────────────────────────────────────
    WRAPPER
-══════════════════════════════════════════ */
+───────────────────────────────────────────── */
 .pg-wrap {
-  max-width: 680px;
+  width: 100%;
+  max-width: 650px;
   margin: 0 auto;
   background: var(--cream);
+
   border: 0.5px solid var(--terra-40);
-  border-radius: 16px;
+  border-radius: 18px;
   overflow: hidden;
-  /* shadow to lift off page background */
-  box-shadow: 0 4px 40px rgba(92,26,26,0.10);
+
+  box-shadow: 0 4px 40px rgba(92, 26, 26, 0.10);
 }
 
-/* ══════════════════════════════════════════
+/* ─────────────────────────────────────────────
    HEADER
-══════════════════════════════════════════ */
+───────────────────────────────────────────── */
 .pg-header {
   background: var(--cream);
+
   padding: 14px 20px;
+
   display: flex;
   justify-content: flex-end;
   align-items: center;
+
   border-bottom: 0.5px solid var(--terra-50);
 }
 
@@ -67,280 +87,410 @@ body {
   color: var(--maroon);
 }
 
-/* ══════════════════════════════════════════
-   HERO
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────
+   HERO SECTION
+───────────────────────────────────────────── */
 .pg-hero {
   background: var(--maroon);
-  padding: 32px 24px;
   text-align: center;
+
+  padding: 34px 24px;
 }
 
 .pg-hero-badge {
   display: inline-block;
+
   background: var(--terra);
   color: var(--maroon);
+
   font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
-  padding: 4px 12px;
-  border-radius: 99px;
-  margin-bottom: 14px;
+  font-weight: 700;
+  letter-spacing: 1.6px;
   text-transform: uppercase;
+
+  padding: 6px 14px;
+  border-radius: 999px;
+
+  margin-bottom: 16px;
 }
 
 .pg-hero h1 {
   font-family: 'Playfair Display', serif;
-  color: var(--cream);
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 800;
-  line-height: 1.15;
-  margin: 0 0 8px;
+  line-height: 1.1;
+
+  color: var(--cream);
+
+  margin-bottom: 10px;
 }
 
-.pg-hero h1 span { color: var(--terra); }
+.pg-hero h1 span {
+  color: var(--terra);
+}
 
 .pg-hero p {
-  color: rgba(212,149,106,0.55);
-  font-size: 13px;
-  margin: 0;
+  font-size: 14px;
+  color: rgba(212, 149, 106, 0.65);
 }
 
-/* ══════════════════════════════════════════
-   BODY AREA
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────
+   BODY
+───────────────────────────────────────────── */
 .pg-body {
   background: var(--cream);
-  padding: 20px 16px;
+  padding: 18px;
 }
 
 .pg-section-title {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1.5px;
+  font-size: 12px;
+  font-weight: 700;
+
+  letter-spacing: 2px;
   text-transform: uppercase;
+
   color: var(--maroon-60);
-  margin-bottom: 12px;
+
+  margin-bottom: 14px;
 }
 
-/* ══════════════════════════════════════════
-   MANGO GRID
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────
+   GRID
+───────────────────────────────────────────── */
 .pg-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-bottom: 20px;
+
+  gap: 12px;
+
+  margin-bottom: 24px;
 }
 
+/* Tablet */
+@media (max-width: 700px) {
+  .pg-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Mobile */
 @media (max-width: 480px) {
-  .pg-grid { grid-template-columns: repeat(2, 1fr); }
+  .pg-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
-/* ── Card ── */
+/* ─────────────────────────────────────────────
+   CARD
+───────────────────────────────────────────── */
 .mango-card {
-  background: #fff;
+  background: #ffffff;
+
   border: 0.5px solid var(--terra-50);
-  border-radius: 16px;
+  border-radius: 18px;
+
   overflow: hidden;
-  transition: border-color 0.2s, transform 0.2s;
+
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+
+  display: flex;
+  flex-direction: column;
+
+  min-height: 220px;
 }
 
 .mango-card:hover:not(.sold-out) {
-  transform: translateY(-3px);
+  transform: translateY(-4px);
 }
 
 .mango-card.selected {
   border: 2px solid var(--terra);
 }
 
-/* sold-out: keep pointer-events for JS but visually dim */
 .mango-card.sold-out {
   opacity: 0.45;
-  pointer-events: none;
   filter: grayscale(1);
+  pointer-events: none;
 }
 
-/* Card top — warm tinted bg */
+/* ─────────────────────────────────────────────
+   CARD TOP
+───────────────────────────────────────────── */
 .pg-card-top {
   background: var(--cream-soft);
-  padding: 14px 10px 10px;
-  text-align: center;
+
+  height: 82px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 16px;
 }
 
-.pg-card-top .emoji { font-size: 34px; }
+.pg-card-top .emoji {
+  font-size: 42px;
+  line-height: 1;
+}
 
-/* Card bottom */
+/* ─────────────────────────────────────────────
+   CARD BOTTOM
+───────────────────────────────────────────── */
 .pg-card-bot {
-  padding: 10px 12px 12px;
+  padding: 12px;
+
+  display: flex;
+  flex-direction: column;
+  flex: 1;
 }
 
 .pg-card-name {
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
+
   color: var(--maroon);
-  margin-bottom: 2px;
+
+  margin-bottom: 3px;
 }
 
 .pg-card-origin {
   font-size: 11px;
   color: var(--maroon-60);
-  margin-bottom: 6px;
+
+  margin-bottom: 8px;
 }
 
 .pg-card-price {
   display: inline-block;
+  align-self: flex-start;
+
   background: var(--maroon);
   color: var(--cream);
+
   font-size: 11px;
-  font-weight: 600;
-  padding: 3px 8px;
-  border-radius: 6px;
-  margin-bottom: 8px;
+  font-weight: 700;
+
+  padding: 4px 8px;
+
+  border-radius: 7px;
+
+  margin-bottom: 10px;
 }
 
 .pg-card-stock {
-  font-size: 10px;
-  color: var(--terra);
+  font-size: 11px;
   font-weight: 600;
-  margin-bottom: 8px;
+
+  color: var(--terra);
+
+  margin-bottom: 10px;
 }
 
-/* sold-out badge inside card */
 .soldout-badge {
   display: inline-block;
-  font-size: 10px;
+
   background: var(--maroon-20);
   color: var(--maroon-60);
-  padding: 2px 6px;
-  border-radius: 4px;
+
+  font-size: 10px;
+  font-weight: 700;
+
+  padding: 4px 8px;
+
+  border-radius: 6px;
 }
 
-/* Qty control row */
+/* ─────────────────────────────────────────────
+   QTY CONTROLS
+───────────────────────────────────────────── */
 .qty-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 4px;
+
+  gap: 6px;
+
+  margin-top: auto;
+  padding-top: 10px;
 }
 
 .qty-btn {
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
+
   border-radius: 50%;
+  border: none;
+
   background: var(--maroon);
   color: var(--cream);
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
+
+  font-size: 18px;
+  font-weight: 700;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
+
   flex-shrink: 0;
-  line-height: 1;
-  transition: opacity 0.15s;
+
+  transition: opacity 0.15s ease;
 }
 
-.qty-btn:active { opacity: 0.75; }
+.qty-btn:hover {
+  opacity: 0.9;
+}
+
+.qty-btn:active {
+  opacity: 0.7;
+}
 
 .qty-display {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
+
   color: var(--maroon);
 }
 
-/* ══════════════════════════════════════════
-   CUSTOMER FORM
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────
+   FORM
+───────────────────────────────────────────── */
 .pg-form {
-  background: #fff;
+  background: #fcfcfc;
+
   border: 0.5px solid var(--terra-40);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 80px;   /* clearance above sticky cart */
+  border-radius: 18px;
+
+  padding: 18px;
+
+  margin-bottom: 90px;
 }
 
 .pg-form h2 {
   font-family: 'Playfair Display', serif;
+
   font-size: 18px;
+  font-weight: 800;
+
   color: var(--maroon);
-  margin: 0 0 14px;
+
+  margin-bottom: 16px;
 }
 
 .pg-input {
   width: 100%;
-  padding: 10px 14px;
-  border: 0.5px solid rgba(212,149,106,0.60);
-  border-radius: 10px;
+
+  padding: 12px 14px;
+
+  border: 0.5px solid rgba(212, 149, 106, 0.60);
+  border-radius: 12px;
+
   background: var(--cream-soft);
+
   color: var(--maroon);
+
   font-size: 13px;
   font-family: 'DM Sans', sans-serif;
-  margin-bottom: 10px;
+
+  margin-bottom: 12px;
+
   outline: none;
-  transition: border-color 0.2s;
+
+  transition: border-color 0.2s ease;
 }
 
-.pg-input::placeholder { color: var(--maroon-60); }
+.pg-input::placeholder {
+  color: var(--maroon-60);
+}
 
 .pg-input:focus {
   border-color: var(--terra);
 }
 
-/* ══════════════════════════════════════════
-   STICKY CART BAR
-══════════════════════════════════════════ */
+/* ─────────────────────────────────────────────
+   STICKY CART
+───────────────────────────────────────────── */
 .pg-cart {
   position: sticky;
   bottom: 0;
+
   background: var(--maroon);
-  padding: 14px 20px;
+
+  padding: 16px 20px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* sits inside .pg-wrap so corners match */
-  border-radius: 0 0 16px 16px;
-  z-index: 10;
+
+  border-radius: 0 0 18px 18px;
+
+  z-index: 20;
 }
 
 .pg-cart-txt {
   color: var(--terra);
-  font-size: 14px;
-  font-weight: 600;
+
+  font-size: 15px;
+  font-weight: 700;
 }
 
-.pg-cart-txt strong { color: var(--cream); }
+.pg-cart-txt strong {
+  color: var(--cream);
+}
 
 .pg-cart-btn {
   background: var(--terra);
   color: var(--maroon);
+
   border: none;
-  padding: 10px 20px;
-  border-radius: 10px;
+  border-radius: 12px;
+
+  padding: 12px 22px;
+
   font-family: 'DM Sans', sans-serif;
-  font-weight: 700;
   font-size: 13px;
+  font-weight: 700;
+
   cursor: pointer;
-  transition: opacity 0.2s;
+
+  transition: opacity 0.2s ease;
 }
 
-.pg-cart-btn:active { opacity: 0.85; }
+.pg-cart-btn:hover {
+  opacity: 0.92;
+}
 
-/* ══════════════════════════════════════════
+.pg-cart-btn:active {
+  opacity: 0.8;
+}
+
+/* ─────────────────────────────────────────────
    TOAST
-══════════════════════════════════════════ */
+───────────────────────────────────────────── */
 .toast {
   position: fixed;
+
   top: 20px;
   right: 20px;
+
   background: var(--maroon);
   color: var(--cream);
+
   padding: 14px 20px;
+
   border-radius: 12px;
+
   font-size: 13px;
-  font-weight: 600;
+  font-weight: 700;
+
   display: none;
+
   z-index: 999;
+
   border: 0.5px solid var(--terra-50);
-  box-shadow: 0 4px 20px rgba(92,26,26,0.25);
+
+  box-shadow: 0 4px 20px rgba(92, 26, 26, 0.25);
 }
