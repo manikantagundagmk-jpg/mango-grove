@@ -1,5 +1,5 @@
 /* =============================================
-   Mango Grove — Premium Responsive UI
+   Mango Grove — Clean Balanced UI
 ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
@@ -16,7 +16,7 @@
 }
 
 /* ─────────────────────────────────────────────
-   ROOT VARIABLES
+   ROOT
 ───────────────────────────────────────────── */
 :root {
 
@@ -27,7 +27,6 @@
   --cream-soft: #FDF5E8;
 
   --maroon-60: rgba(92, 26, 26, 0.60);
-  --maroon-20: rgba(92, 26, 26, 0.20);
 
   --terra-50: rgba(212, 149, 106, 0.50);
   --terra-40: rgba(212, 149, 106, 0.40);
@@ -45,28 +44,28 @@ body {
 
   min-height: 100vh;
 
-  padding: 20px;
+  padding: 14px;
 }
 
 /* ─────────────────────────────────────────────
-   MAIN WRAPPER
+   WRAPPER
 ───────────────────────────────────────────── */
 .pg-wrap {
 
-  width: calc(100% - 40px);
-  max-width: 1400px;
+  width: 100%;
+  max-width: 1280px;
 
   margin: 0 auto;
 
   background: var(--cream);
 
   border: 1px solid var(--terra-40);
-  border-radius: 24px;
+  border-radius: 22px;
 
   overflow: hidden;
 
   box-shadow:
-    0 10px 50px rgba(92, 26, 26, 0.10);
+    0 8px 35px rgba(92, 26, 26, 0.08);
 }
 
 /* ─────────────────────────────────────────────
@@ -76,11 +75,11 @@ body {
 
   background: var(--cream);
 
-  padding: 18px 32px;
+  padding: 16px 28px;
 
   display: flex;
-  justify-content: flex-start;
   align-items: center;
+  justify-content: flex-start;
 
   border-bottom: 1px solid var(--terra-50);
 }
@@ -88,7 +87,7 @@ body {
 /* LOGO */
 .pg-logo {
 
-  height: 70px;
+  height: 90px;
   width: auto;
 
   object-fit: contain;
@@ -98,7 +97,7 @@ body {
 
   font-family: 'Playfair Display', serif;
 
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 800;
 
   color: var(--maroon);
@@ -113,7 +112,7 @@ body {
 
   text-align: center;
 
-  padding: 80px 30px;
+  padding: 55px 24px;
 }
 
 .pg-hero-badge {
@@ -123,31 +122,31 @@ body {
   background: var(--terra);
   color: var(--maroon);
 
-  padding: 8px 18px;
+  padding: 7px 16px;
 
   border-radius: 999px;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 
-  letter-spacing: 2px;
+  letter-spacing: 1.8px;
   text-transform: uppercase;
 
-  margin-bottom: 24px;
+  margin-bottom: 18px;
 }
 
 .pg-hero h1 {
 
   font-family: 'Playfair Display', serif;
 
-  font-size: clamp(42px, 5vw, 72px);
+  font-size: clamp(34px, 4vw, 56px);
   font-weight: 800;
 
-  line-height: 1.08;
+  line-height: 1.1;
 
   color: var(--cream);
 
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .pg-hero h1 span {
@@ -156,7 +155,7 @@ body {
 
 .pg-hero p {
 
-  font-size: 18px;
+  font-size: 15px;
 
   color: rgba(212, 149, 106, 0.70);
 }
@@ -166,14 +165,12 @@ body {
 ───────────────────────────────────────────── */
 .pg-body {
 
-  background: var(--cream);
-
-  padding: 34px;
+  padding: 26px;
 }
 
 .pg-section-title {
 
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
 
   letter-spacing: 2px;
@@ -181,7 +178,7 @@ body {
 
   color: var(--maroon-60);
 
-  margin-bottom: 22px;
+  margin-bottom: 18px;
 }
 
 /* ─────────────────────────────────────────────
@@ -192,11 +189,11 @@ body {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(320px, 1fr));
+    repeat(auto-fit, minmax(260px, 1fr));
 
-  gap: 22px;
+  gap: 18px;
 
-  margin-bottom: 36px;
+  margin-bottom: 28px;
 }
 
 /* ─────────────────────────────────────────────
@@ -207,27 +204,26 @@ body {
   background: #ffffff;
 
   border: 1px solid var(--terra-50);
-  border-radius: 22px;
+  border-radius: 18px;
 
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
 
-  min-height: 340px;
+  min-height: 270px;
 
   transition:
-    transform 0.25s ease,
-    border-color 0.25s ease,
-    box-shadow 0.25s ease;
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 .mango-card:hover:not(.sold-out) {
 
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 
   box-shadow:
-    0 10px 25px rgba(92, 26, 26, 0.10);
+    0 6px 18px rgba(92, 26, 26, 0.08);
 }
 
 .mango-card.selected {
@@ -250,18 +246,16 @@ body {
 
   background: var(--cream-soft);
 
-  height: 120px;
+  height: 95px;
 
   display: flex;
   align-items: center;
   justify-content: center;
-
-  padding: 20px;
 }
 
 .pg-card-top .emoji {
 
-  font-size: 58px;
+  font-size: 48px;
 
   line-height: 1;
 }
@@ -271,7 +265,7 @@ body {
 ───────────────────────────────────────────── */
 .pg-card-bot {
 
-  padding: 20px;
+  padding: 16px;
 
   display: flex;
   flex-direction: column;
@@ -281,21 +275,21 @@ body {
 
 .pg-card-name {
 
-  font-size: 26px;
+  font-size: 18px;
   font-weight: 700;
 
   color: var(--maroon);
 
-  margin-bottom: 4px;
+  margin-bottom: 3px;
 }
 
 .pg-card-origin {
 
-  font-size: 15px;
+  font-size: 13px;
 
   color: var(--maroon-60);
 
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .pg-card-price {
@@ -306,39 +300,38 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  padding: 8px 14px;
+  padding: 6px 10px;
 
-  border-radius: 10px;
+  border-radius: 8px;
 
-  font-size: 15px;
+  font-size: 13px;
   font-weight: 700;
 
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
 .pg-card-stock {
 
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
 
   color: var(--terra);
 
-  margin-bottom: 16px;
+  margin-bottom: 12px;
 }
 
-/* SOLD OUT BADGE */
 .soldout-badge {
 
   display: inline-block;
 
-  background: var(--maroon-20);
-  color: var(--maroon-60);
+  background: rgba(92,26,26,0.12);
+  color: var(--maroon);
 
-  padding: 6px 12px;
+  padding: 5px 10px;
 
   border-radius: 8px;
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 }
 
@@ -353,13 +346,13 @@ body {
 
   margin-top: auto;
 
-  padding-top: 16px;
+  padding-top: 12px;
 }
 
 .qty-btn {
 
-  width: 44px;
-  height: 44px;
+  width: 38px;
+  height: 38px;
 
   border-radius: 50%;
   border: none;
@@ -367,7 +360,7 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  font-size: 24px;
+  font-size: 22px;
   font-weight: 700;
 
   display: flex;
@@ -382,16 +375,16 @@ body {
 }
 
 .qty-btn:hover {
-  transform: scale(1.05);
+  transform: scale(1.04);
 }
 
 .qty-btn:active {
-  opacity: 0.75;
+  opacity: 0.8;
 }
 
 .qty-display {
 
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 700;
 
   color: var(--maroon);
@@ -405,42 +398,42 @@ body {
   background: #fcfcfc;
 
   border: 1px solid var(--terra-40);
-  border-radius: 24px;
+  border-radius: 20px;
 
-  padding: 30px;
+  padding: 24px;
 
-  margin-bottom: 110px;
+  margin-bottom: 95px;
 }
 
 .pg-form h2 {
 
   font-family: 'Playfair Display', serif;
 
-  font-size: 36px;
+  font-size: 28px;
   font-weight: 800;
 
   color: var(--maroon);
 
-  margin-bottom: 24px;
+  margin-bottom: 20px;
 }
 
 .pg-input {
 
   width: 100%;
 
-  padding: 18px 18px;
+  padding: 14px 16px;
 
-  border: 1px solid rgba(212, 149, 106, 0.60);
-  border-radius: 14px;
+  border: 1px solid rgba(212,149,106,0.55);
+  border-radius: 12px;
 
   background: var(--cream-soft);
 
   color: var(--maroon);
 
-  font-size: 16px;
+  font-size: 14px;
   font-family: 'DM Sans', sans-serif;
 
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 
   outline: none;
 
@@ -470,13 +463,13 @@ body {
 
   background: var(--maroon);
 
-  padding: 22px 30px;
+  padding: 18px 24px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 0 0 24px 24px;
+  border-radius: 0 0 22px 22px;
 
   z-index: 100;
 }
@@ -485,7 +478,7 @@ body {
 
   color: var(--terra);
 
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
 }
 
@@ -499,13 +492,13 @@ body {
   color: var(--maroon);
 
   border: none;
-  border-radius: 14px;
+  border-radius: 12px;
 
-  padding: 16px 30px;
+  padding: 13px 24px;
 
   font-family: 'DM Sans', sans-serif;
 
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 700;
 
   cursor: pointer;
@@ -516,7 +509,7 @@ body {
 }
 
 .pg-cart-btn:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
 }
 
 .pg-cart-btn:active {
@@ -530,27 +523,25 @@ body {
 
   position: fixed;
 
-  top: 24px;
-  right: 24px;
+  top: 20px;
+  right: 20px;
 
   background: var(--maroon);
   color: var(--cream);
 
-  padding: 16px 22px;
+  padding: 14px 18px;
 
-  border-radius: 14px;
+  border-radius: 12px;
 
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 
   display: none;
 
   z-index: 999;
 
-  border: 1px solid var(--terra-50);
-
   box-shadow:
-    0 8px 25px rgba(92, 26, 26, 0.25);
+    0 6px 18px rgba(92, 26, 26, 0.20);
 }
 
 /* ─────────────────────────────────────────────
@@ -558,26 +549,18 @@ body {
 ───────────────────────────────────────────── */
 @media (max-width: 900px) {
 
-  .pg-wrap {
-    width: calc(100% - 20px);
-  }
-
   .pg-grid {
 
     grid-template-columns:
-      repeat(auto-fit, minmax(240px, 1fr));
+      repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .pg-logo {
+    height: 74px;
   }
 
   .pg-hero {
-    padding: 60px 24px;
-  }
-
-  .pg-body {
-    padding: 24px;
-  }
-
-  .pg-card-name {
-    font-size: 22px;
+    padding: 48px 20px;
   }
 }
 
@@ -590,73 +573,48 @@ body {
     padding: 8px;
   }
 
-  .pg-wrap {
-
-    width: 100%;
-
-    border-radius: 16px;
-  }
-
   .pg-header {
-    padding: 16px 20px;
+    padding: 14px 18px;
   }
 
   .pg-logo {
-    height: 56px;
+    height: 64px;
+  }
+
+  .pg-body {
+    padding: 18px;
+  }
+
+  .pg-grid {
+    grid-template-columns: 1fr;
   }
 
   .pg-hero {
 
-    padding: 46px 20px;
+    padding: 40px 18px;
   }
 
   .pg-hero h1 {
-
-    font-size: 40px;
-  }
-
-  .pg-hero p {
-    font-size: 15px;
-  }
-
-  .pg-grid {
-
-    grid-template-columns: 1fr;
-  }
-
-  .mango-card {
-
-    min-height: 300px;
+    font-size: 38px;
   }
 
   .pg-form {
-
-    padding: 22px;
-  }
-
-  .pg-form h2 {
-
-    font-size: 28px;
+    padding: 20px;
   }
 
   .pg-cart {
 
     flex-direction: column;
-    gap: 14px;
+    gap: 12px;
 
     align-items: stretch;
-
-    padding: 18px;
   }
 
   .pg-cart-btn {
-
     width: 100%;
   }
 
   .pg-cart-txt {
-
     text-align: center;
-    font-size: 18px;
   }
 }
