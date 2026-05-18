@@ -1,9 +1,9 @@
 /* =============================================
    Mango Grove — style.css
-   Palette: Maroon #5C1A1A · Terracotta #D4956A · Cream #F5EDD8
+   Premium Responsive Version
 ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;600;700&display=swap');
 
 /* ─────────────────────────────────────────────
    RESET
@@ -40,23 +40,24 @@ body {
   background: var(--cream);
   color: var(--maroon);
   min-height: 100vh;
-  padding: 20px 0;
+  padding: 24px;
 }
 
 /* ─────────────────────────────────────────────
    WRAPPER
 ───────────────────────────────────────────── */
 .pg-wrap {
-  width: 100%;
-  max-width: 650px;
+  width: min(100%, 1100px);
   margin: 0 auto;
+
   background: var(--cream);
 
-  border: 0.5px solid var(--terra-40);
-  border-radius: 18px;
+  border: 1px solid var(--terra-40);
+  border-radius: 22px;
+
   overflow: hidden;
 
-  box-shadow: 0 4px 40px rgba(92, 26, 26, 0.10);
+  box-shadow: 0 10px 50px rgba(92, 26, 26, 0.10);
 }
 
 /* ─────────────────────────────────────────────
@@ -65,36 +66,37 @@ body {
 .pg-header {
   background: var(--cream);
 
-  padding: 14px 20px;
+  padding: 18px 28px;
 
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;   /* LOGO LEFT */
   align-items: center;
 
-  border-bottom: 0.5px solid var(--terra-50);
+  border-bottom: 1px solid var(--terra-50);
 }
 
 .pg-logo {
-  height: 52px;
+  height: 56px;
   width: auto;
   object-fit: contain;
 }
 
 .pg-logo-fallback {
   font-family: 'Playfair Display', serif;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 800;
   color: var(--maroon);
 }
 
 /* ─────────────────────────────────────────────
-   HERO SECTION
+   HERO
 ───────────────────────────────────────────── */
 .pg-hero {
   background: var(--maroon);
+
   text-align: center;
 
-  padding: 34px 24px;
+  padding: 70px 30px;
 }
 
 .pg-hero-badge {
@@ -103,26 +105,30 @@ body {
   background: var(--terra);
   color: var(--maroon);
 
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 1.6px;
+
+  letter-spacing: 2px;
   text-transform: uppercase;
 
-  padding: 6px 14px;
+  padding: 8px 18px;
+
   border-radius: 999px;
 
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .pg-hero h1 {
   font-family: 'Playfair Display', serif;
-  font-size: 34px;
+
+  font-size: clamp(38px, 5vw, 62px);
   font-weight: 800;
-  line-height: 1.1;
+
+  line-height: 1.08;
 
   color: var(--cream);
 
-  margin-bottom: 10px;
+  margin-bottom: 16px;
 }
 
 .pg-hero h1 span {
@@ -130,8 +136,8 @@ body {
 }
 
 .pg-hero p {
-  font-size: 14px;
-  color: rgba(212, 149, 106, 0.65);
+  font-size: 18px;
+  color: rgba(212, 149, 106, 0.72);
 }
 
 /* ─────────────────────────────────────────────
@@ -139,11 +145,11 @@ body {
 ───────────────────────────────────────────── */
 .pg-body {
   background: var(--cream);
-  padding: 18px;
+  padding: 28px;
 }
 
 .pg-section-title {
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
 
   letter-spacing: 2px;
@@ -151,7 +157,7 @@ body {
 
   color: var(--maroon-60);
 
-  margin-bottom: 14px;
+  margin-bottom: 20px;
 }
 
 /* ─────────────────────────────────────────────
@@ -159,25 +165,13 @@ body {
 ───────────────────────────────────────────── */
 .pg-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
 
-  gap: 12px;
+  grid-template-columns:
+    repeat(auto-fit, minmax(260px, 1fr));
 
-  margin-bottom: 24px;
-}
+  gap: 18px;
 
-/* Tablet */
-@media (max-width: 700px) {
-  .pg-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* Mobile */
-@media (max-width: 480px) {
-  .pg-grid {
-    grid-template-columns: 1fr;
-  }
+  margin-bottom: 32px;
 }
 
 /* ─────────────────────────────────────────────
@@ -186,23 +180,27 @@ body {
 .mango-card {
   background: #ffffff;
 
-  border: 0.5px solid var(--terra-50);
-  border-radius: 18px;
+  border: 1px solid var(--terra-50);
+  border-radius: 22px;
 
   overflow: hidden;
-
-  transition:
-    transform 0.2s ease,
-    border-color 0.2s ease;
 
   display: flex;
   flex-direction: column;
 
-  min-height: 220px;
+  min-height: 290px;
+
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .mango-card:hover:not(.sold-out) {
-  transform: translateY(-4px);
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 8px 25px rgba(92, 26, 26, 0.10);
 }
 
 .mango-card.selected {
@@ -221,17 +219,17 @@ body {
 .pg-card-top {
   background: var(--cream-soft);
 
-  height: 82px;
+  height: 110px;
 
   display: flex;
   align-items: center;
   justify-content: center;
 
-  padding: 16px;
+  padding: 20px;
 }
 
 .pg-card-top .emoji {
-  font-size: 42px;
+  font-size: 54px;
   line-height: 1;
 }
 
@@ -239,27 +237,28 @@ body {
    CARD BOTTOM
 ───────────────────────────────────────────── */
 .pg-card-bot {
-  padding: 12px;
+  padding: 18px;
 
   display: flex;
   flex-direction: column;
+
   flex: 1;
 }
 
 .pg-card-name {
-  font-size: 13px;
+  font-size: 24px;
   font-weight: 700;
 
   color: var(--maroon);
 
-  margin-bottom: 3px;
+  margin-bottom: 4px;
 }
 
 .pg-card-origin {
-  font-size: 11px;
+  font-size: 14px;
   color: var(--maroon-60);
 
-  margin-bottom: 8px;
+  margin-bottom: 14px;
 }
 
 .pg-card-price {
@@ -269,23 +268,23 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 700;
 
-  padding: 4px 8px;
+  padding: 7px 12px;
 
-  border-radius: 7px;
+  border-radius: 10px;
 
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .pg-card-stock {
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
 
   color: var(--terra);
 
-  margin-bottom: 10px;
+  margin-bottom: 14px;
 }
 
 .soldout-badge {
@@ -294,31 +293,30 @@ body {
   background: var(--maroon-20);
   color: var(--maroon-60);
 
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 700;
 
-  padding: 4px 8px;
+  padding: 6px 10px;
 
-  border-radius: 6px;
+  border-radius: 8px;
 }
 
 /* ─────────────────────────────────────────────
-   QTY CONTROLS
+   QUANTITY CONTROLS
 ───────────────────────────────────────────── */
 .qty-control {
   display: flex;
   align-items: center;
   justify-content: space-between;
 
-  gap: 6px;
-
   margin-top: auto;
-  padding-top: 10px;
+
+  padding-top: 14px;
 }
 
 .qty-btn {
-  width: 30px;
-  height: 30px;
+  width: 42px;
+  height: 42px;
 
   border-radius: 50%;
   border: none;
@@ -326,7 +324,7 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  font-size: 18px;
+  font-size: 22px;
   font-weight: 700;
 
   display: flex;
@@ -335,21 +333,21 @@ body {
 
   cursor: pointer;
 
-  flex-shrink: 0;
-
-  transition: opacity 0.15s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .qty-btn:hover {
-  opacity: 0.9;
+  transform: scale(1.05);
 }
 
 .qty-btn:active {
-  opacity: 0.7;
+  opacity: 0.75;
 }
 
 .qty-display {
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 700;
 
   color: var(--maroon);
@@ -361,45 +359,47 @@ body {
 .pg-form {
   background: #fcfcfc;
 
-  border: 0.5px solid var(--terra-40);
-  border-radius: 18px;
+  border: 1px solid var(--terra-40);
+  border-radius: 24px;
 
-  padding: 18px;
+  padding: 28px;
 
-  margin-bottom: 90px;
+  margin-bottom: 100px;
 }
 
 .pg-form h2 {
   font-family: 'Playfair Display', serif;
 
-  font-size: 18px;
+  font-size: 34px;
   font-weight: 800;
 
   color: var(--maroon);
 
-  margin-bottom: 16px;
+  margin-bottom: 24px;
 }
 
 .pg-input {
   width: 100%;
 
-  padding: 12px 14px;
+  padding: 16px 18px;
 
-  border: 0.5px solid rgba(212, 149, 106, 0.60);
-  border-radius: 12px;
+  border: 1px solid rgba(212, 149, 106, 0.60);
+  border-radius: 14px;
 
   background: var(--cream-soft);
 
   color: var(--maroon);
 
-  font-size: 13px;
+  font-size: 15px;
   font-family: 'DM Sans', sans-serif;
 
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 
   outline: none;
 
-  transition: border-color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
 }
 
 .pg-input::placeholder {
@@ -408,6 +408,7 @@ body {
 
 .pg-input:focus {
   border-color: var(--terra);
+  background: #fff;
 }
 
 /* ─────────────────────────────────────────────
@@ -419,21 +420,21 @@ body {
 
   background: var(--maroon);
 
-  padding: 16px 20px;
+  padding: 18px 28px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 0 0 18px 18px;
+  border-radius: 0 0 22px 22px;
 
-  z-index: 20;
+  z-index: 50;
 }
 
 .pg-cart-txt {
   color: var(--terra);
 
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 700;
 }
 
@@ -446,21 +447,23 @@ body {
   color: var(--maroon);
 
   border: none;
-  border-radius: 12px;
+  border-radius: 14px;
 
-  padding: 12px 22px;
+  padding: 14px 26px;
 
   font-family: 'DM Sans', sans-serif;
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
 
   cursor: pointer;
 
-  transition: opacity 0.2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
 
 .pg-cart-btn:hover {
-  opacity: 0.92;
+  transform: translateY(-1px);
 }
 
 .pg-cart-btn:active {
@@ -473,24 +476,102 @@ body {
 .toast {
   position: fixed;
 
-  top: 20px;
-  right: 20px;
+  top: 24px;
+  right: 24px;
 
   background: var(--maroon);
   color: var(--cream);
 
-  padding: 14px 20px;
+  padding: 16px 22px;
 
-  border-radius: 12px;
+  border-radius: 14px;
 
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 700;
 
   display: none;
 
   z-index: 999;
 
-  border: 0.5px solid var(--terra-50);
+  border: 1px solid var(--terra-50);
 
-  box-shadow: 0 4px 20px rgba(92, 26, 26, 0.25);
+  box-shadow:
+    0 8px 25px rgba(92, 26, 26, 0.25);
+}
+
+/* ─────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  body {
+    padding: 12px;
+  }
+
+  .pg-body {
+    padding: 18px;
+  }
+
+  .pg-hero {
+    padding: 50px 20px;
+  }
+
+  .pg-hero p {
+    font-size: 15px;
+  }
+
+  .pg-grid {
+    grid-template-columns:
+      repeat(auto-fit, minmax(220px, 1fr));
+  }
+
+  .pg-card-name {
+    font-size: 20px;
+  }
+
+  .pg-form h2 {
+    font-size: 28px;
+  }
+
+  .pg-cart {
+    padding: 16px 18px;
+  }
+
+  .pg-cart-txt {
+    font-size: 16px;
+  }
+
+  .pg-cart-btn {
+    padding: 12px 18px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 520px) {
+
+  .pg-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pg-hero h1 {
+    font-size: 38px;
+  }
+
+  .pg-form {
+    padding: 20px;
+  }
+
+  .pg-form h2 {
+    font-size: 24px;
+  }
+
+  .pg-cart {
+    flex-direction: column;
+    gap: 14px;
+    align-items: stretch;
+  }
+
+  .pg-cart-btn {
+    width: 100%;
+  }
 }
