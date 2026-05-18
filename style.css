@@ -23,11 +23,17 @@ header {
 }
 
 .logo {
-  font-size: 2rem;
-  font-family: 'Playfair Display', serif;
-  color: var(--green);
+  display: flex;
+  justify-content: center;
+  padding: 16px 0;
 }
 
+.logo-img {
+  height: 90px;
+  width: auto;
+  object-fit: contain;
+  border-radius: 16px;
+}
 .hero {
   text-align: center;
   padding: 20px;
