@@ -1,5 +1,5 @@
 /* =============================================
-   Mango Grove — Clean Balanced UI
+   Mango Grove — Refined Compact Premium UI
 ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=DM+Sans:wght@300;400;500;600;700&display=swap');
@@ -44,7 +44,7 @@ body {
 
   min-height: 100vh;
 
-  padding: 14px;
+  padding: 10px;
 }
 
 /* ─────────────────────────────────────────────
@@ -53,19 +53,19 @@ body {
 .pg-wrap {
 
   width: 100%;
-  max-width: 1280px;
+  max-width: 1380px;
 
   margin: 0 auto;
 
   background: var(--cream);
 
   border: 1px solid var(--terra-40);
-  border-radius: 22px;
+  border-radius: 18px;
 
   overflow: hidden;
 
   box-shadow:
-    0 8px 35px rgba(92, 26, 26, 0.08);
+    0 6px 24px rgba(92, 26, 26, 0.06);
 }
 
 /* ─────────────────────────────────────────────
@@ -75,7 +75,7 @@ body {
 
   background: var(--cream);
 
-  padding: 16px 28px;
+  padding: 10px 22px;
 
   display: flex;
   align-items: center;
@@ -87,7 +87,7 @@ body {
 /* LOGO */
 .pg-logo {
 
-  height: 90px;
+  height: 88px;
   width: auto;
 
   object-fit: contain;
@@ -97,7 +97,7 @@ body {
 
   font-family: 'Playfair Display', serif;
 
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
 
   color: var(--maroon);
@@ -112,7 +112,7 @@ body {
 
   text-align: center;
 
-  padding: 55px 24px;
+  padding: 42px 20px;
 }
 
 .pg-hero-badge {
@@ -122,31 +122,31 @@ body {
   background: var(--terra);
   color: var(--maroon);
 
-  padding: 7px 16px;
+  padding: 6px 14px;
 
   border-radius: 999px;
 
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
 
   letter-spacing: 1.8px;
   text-transform: uppercase;
 
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 .pg-hero h1 {
 
   font-family: 'Playfair Display', serif;
 
-  font-size: clamp(34px, 4vw, 56px);
+  font-size: clamp(28px, 4vw, 48px);
   font-weight: 800;
 
-  line-height: 1.1;
+  line-height: 1.08;
 
   color: var(--cream);
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .pg-hero h1 span {
@@ -155,9 +155,9 @@ body {
 
 .pg-hero p {
 
-  font-size: 15px;
+  font-size: 14px;
 
-  color: rgba(212, 149, 106, 0.70);
+  color: rgba(212, 149, 106, 0.68);
 }
 
 /* ─────────────────────────────────────────────
@@ -165,12 +165,12 @@ body {
 ───────────────────────────────────────────── */
 .pg-body {
 
-  padding: 26px;
+  padding: 16px;
 }
 
 .pg-section-title {
 
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
 
   letter-spacing: 2px;
@@ -178,7 +178,7 @@ body {
 
   color: var(--maroon-60);
 
-  margin-bottom: 18px;
+  margin-bottom: 14px;
 }
 
 /* ─────────────────────────────────────────────
@@ -189,11 +189,11 @@ body {
   display: grid;
 
   grid-template-columns:
-    repeat(auto-fit, minmax(260px, 1fr));
+    repeat(auto-fit, minmax(280px, 1fr));
 
-  gap: 18px;
+  gap: 12px;
 
-  margin-bottom: 28px;
+  margin-bottom: 22px;
 }
 
 /* ─────────────────────────────────────────────
@@ -204,26 +204,26 @@ body {
   background: #ffffff;
 
   border: 1px solid var(--terra-50);
-  border-radius: 18px;
+  border-radius: 16px;
 
   overflow: hidden;
 
   display: flex;
   flex-direction: column;
 
-  min-height: 270px;
+  min-height: 210px;
 
   transition:
-    transform 0.2s ease,
-    box-shadow 0.2s ease;
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
 }
 
 .mango-card:hover:not(.sold-out) {
 
-  transform: translateY(-3px);
+  transform: translateY(-2px);
 
   box-shadow:
-    0 6px 18px rgba(92, 26, 26, 0.08);
+    0 4px 12px rgba(92, 26, 26, 0.06);
 }
 
 .mango-card.selected {
@@ -246,7 +246,7 @@ body {
 
   background: var(--cream-soft);
 
-  height: 95px;
+  height: 72px;
 
   display: flex;
   align-items: center;
@@ -255,7 +255,7 @@ body {
 
 .pg-card-top .emoji {
 
-  font-size: 48px;
+  font-size: 40px;
 
   line-height: 1;
 }
@@ -265,7 +265,7 @@ body {
 ───────────────────────────────────────────── */
 .pg-card-bot {
 
-  padding: 16px;
+  padding: 12px;
 
   display: flex;
   flex-direction: column;
@@ -275,21 +275,21 @@ body {
 
 .pg-card-name {
 
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
 
   color: var(--maroon);
 
-  margin-bottom: 3px;
+  margin-bottom: 2px;
 }
 
 .pg-card-origin {
 
-  font-size: 13px;
+  font-size: 11px;
 
   color: var(--maroon-60);
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .pg-card-price {
@@ -300,26 +300,27 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  padding: 6px 10px;
+  padding: 4px 8px;
 
-  border-radius: 8px;
+  border-radius: 6px;
 
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .pg-card-stock {
 
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
 
   color: var(--terra);
 
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
+/* SOLD OUT BADGE */
 .soldout-badge {
 
   display: inline-block;
@@ -327,11 +328,11 @@ body {
   background: rgba(92,26,26,0.12);
   color: var(--maroon);
 
-  padding: 5px 10px;
+  padding: 4px 8px;
 
-  border-radius: 8px;
+  border-radius: 6px;
 
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
 }
 
@@ -346,13 +347,13 @@ body {
 
   margin-top: auto;
 
-  padding-top: 12px;
+  padding-top: 8px;
 }
 
 .qty-btn {
 
-  width: 38px;
-  height: 38px;
+  width: 30px;
+  height: 30px;
 
   border-radius: 50%;
   border: none;
@@ -360,7 +361,7 @@ body {
   background: var(--maroon);
   color: var(--cream);
 
-  font-size: 22px;
+  font-size: 18px;
   font-weight: 700;
 
   display: flex;
@@ -370,8 +371,8 @@ body {
   cursor: pointer;
 
   transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+    transform 0.18s ease,
+    opacity 0.18s ease;
 }
 
 .qty-btn:hover {
@@ -384,7 +385,7 @@ body {
 
 .qty-display {
 
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
 
   color: var(--maroon);
@@ -398,42 +399,42 @@ body {
   background: #fcfcfc;
 
   border: 1px solid var(--terra-40);
-  border-radius: 20px;
+  border-radius: 18px;
 
-  padding: 24px;
+  padding: 18px;
 
-  margin-bottom: 95px;
+  margin-bottom: 88px;
 }
 
 .pg-form h2 {
 
   font-family: 'Playfair Display', serif;
 
-  font-size: 28px;
+  font-size: 24px;
   font-weight: 800;
 
   color: var(--maroon);
 
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .pg-input {
 
   width: 100%;
 
-  padding: 14px 16px;
+  padding: 12px 14px;
 
   border: 1px solid rgba(212,149,106,0.55);
-  border-radius: 12px;
+  border-radius: 10px;
 
   background: var(--cream-soft);
 
   color: var(--maroon);
 
-  font-size: 14px;
+  font-size: 13px;
   font-family: 'DM Sans', sans-serif;
 
-  margin-bottom: 14px;
+  margin-bottom: 12px;
 
   outline: none;
 
@@ -463,13 +464,13 @@ body {
 
   background: var(--maroon);
 
-  padding: 18px 24px;
+  padding: 14px 20px;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  border-radius: 0 0 22px 22px;
+  border-radius: 0 0 18px 18px;
 
   z-index: 100;
 }
@@ -478,7 +479,7 @@ body {
 
   color: var(--terra);
 
-  font-size: 18px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -492,20 +493,20 @@ body {
   color: var(--maroon);
 
   border: none;
-  border-radius: 12px;
+  border-radius: 10px;
 
-  padding: 13px 24px;
+  padding: 11px 18px;
 
   font-family: 'DM Sans', sans-serif;
 
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 
   cursor: pointer;
 
   transition:
-    transform 0.2s ease,
-    opacity 0.2s ease;
+    transform 0.18s ease,
+    opacity 0.18s ease;
 }
 
 .pg-cart-btn:hover {
@@ -523,17 +524,17 @@ body {
 
   position: fixed;
 
-  top: 20px;
-  right: 20px;
+  top: 16px;
+  right: 16px;
 
   background: var(--maroon);
   color: var(--cream);
 
-  padding: 14px 18px;
+  padding: 12px 16px;
 
-  border-radius: 12px;
+  border-radius: 10px;
 
-  font-size: 13px;
+  font-size: 12px;
   font-weight: 700;
 
   display: none;
@@ -541,7 +542,7 @@ body {
   z-index: 999;
 
   box-shadow:
-    0 6px 18px rgba(92, 26, 26, 0.20);
+    0 4px 12px rgba(92, 26, 26, 0.18);
 }
 
 /* ─────────────────────────────────────────────
@@ -556,11 +557,7 @@ body {
   }
 
   .pg-logo {
-    height: 74px;
-  }
-
-  .pg-hero {
-    padding: 48px 20px;
+    height: 72px;
   }
 }
 
@@ -570,19 +567,19 @@ body {
 @media (max-width: 600px) {
 
   body {
-    padding: 8px;
+    padding: 6px;
   }
 
   .pg-header {
-    padding: 14px 18px;
+    padding: 10px 16px;
   }
 
   .pg-logo {
-    height: 64px;
+    height: 58px;
   }
 
   .pg-body {
-    padding: 18px;
+    padding: 14px;
   }
 
   .pg-grid {
@@ -591,21 +588,21 @@ body {
 
   .pg-hero {
 
-    padding: 40px 18px;
+    padding: 34px 16px;
   }
 
   .pg-hero h1 {
-    font-size: 38px;
+    font-size: 34px;
   }
 
   .pg-form {
-    padding: 20px;
+    padding: 16px;
   }
 
   .pg-cart {
 
     flex-direction: column;
-    gap: 12px;
+    gap: 10px;
 
     align-items: stretch;
   }
