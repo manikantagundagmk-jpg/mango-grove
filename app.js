@@ -63,56 +63,34 @@ function renderMangoes() {
 
     const remainingStock = m.stock_kg - qty;
 
+    const isSoldOut = m.stock_kg <= 0;
+
     const card = document.createElement('div');
 
     card.className = 'mango-card';
 
-    if (qty > 0) {
-      card.classList.add('selected');
-    }
-
-    if (m.stock_kg <= 0) {
-      card.classList.add('sold-out');
-    }
+    if (qty > 0) card.classList.add('selected');
+    if (isSoldOut) card.classList.add('sold-out');
 
     card.innerHTML = `
-      <div class="emoji">${m.emoji}</div>
-
-      <div class="name">${m.name}</div>
-
-      <div class="origin">${m.origin}</div>
-
-      <div class="price">
-        ₹${m.price_per_kg}/KG
+      <div class="pg-card-top">
+        <div class="emoji">${m.emoji}</div>
       </div>
+      <div class="pg-card-bot">
+        <div class="pg-card-name">${m.name}</div>
+        <div class="pg-card-origin">${m.origin}</div>
+        <div class="pg-card-price">₹${m.price_per_kg}/KG</div>
 
-      <div class="stock">
-        ${
-          m.stock_kg > 0
-          ? `Available: ${remainingStock} KG`
-          : 'SOLD OUT'
+        ${isSoldOut
+          ? `<div class="soldout-badge">SOLD OUT</div>`
+          : `<div class="pg-card-stock">${remainingStock} KG left</div>
+             <div class="qty-control">
+               <button class="qty-btn" onclick="decreaseQty('${m.id}')">−</button>
+               <div class="qty-display">${qty} KG</div>
+               <button class="qty-btn" onclick="increaseQty('${m.id}')"
+                 ${qty + 5 > m.stock_kg ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''}>+</button>
+             </div>`
         }
-      </div>
-
-      <div class="qty-control">
-
-        <button class="qty-btn"
-          onclick="decreaseQty('${m.id}')">
-          −
-        </button>
-
-        <div class="qty-display">
-          ${qty} KG
-        </div>
-
-        <button
-          class="qty-btn"
-          onclick="increaseQty('${m.id}')"
-          ${qty + 5 > m.stock_kg ? 'disabled' : ''}
-        >
-          +
-        </button>
-
       </div>
     `;
 
@@ -125,6 +103,7 @@ function renderMangoes() {
 // =============================
 // INCREASE QTY
 // =============================
+
 function increaseQty(id) {
   const mango = mangoes.find(m => m.id === id);
   if (!mango) return;
@@ -174,13 +153,12 @@ function updateCartUI() {
   );
 
   const totalPrice = items.reduce(
-    (sum, item) =>
-      sum + (item.quantity * item.price_per_kg),
+    (sum, item) => sum + (item.quantity * item.price_per_kg),
     0
   );
 
   document.getElementById('cartText').innerHTML =
-    `<strong>${totalKg} KG</strong> • ₹${totalPrice}`;
+    `<strong>${totalKg} KG</strong> &nbsp;•&nbsp; ₹${totalPrice}`;
 }
 
 // =============================
@@ -189,17 +167,9 @@ function updateCartUI() {
 
 async function placeOrder() {
 
-  const name =
-    document.getElementById('customerName')
-      .value.trim();
-
-  const phone =
-    document.getElementById('customerPhone')
-      .value.trim();
-
-  const address =
-    document.getElementById('customerAddress')
-      .value.trim();
+  const name    = document.getElementById('customerName').value.trim();
+  const phone   = document.getElementById('customerPhone').value.trim();
+  const address = document.getElementById('customerAddress').value.trim();
 
   const items = Object.values(cart);
 
@@ -228,12 +198,9 @@ async function placeOrder() {
     return;
   }
 
-  // verify each item stock
   for (const item of items) {
 
-    const latest = latestStock.find(
-      m => m.id === item.id
-    );
+    const latest = latestStock.find(m => m.id === item.id);
 
     if (!latest) {
       showToast(`${item.name} unavailable`);
@@ -241,14 +208,8 @@ async function placeOrder() {
     }
 
     if (item.quantity > latest.stock_kg) {
-
-      showToast(
-        `${item.name} only has ${latest.stock_kg} KG left`
-      );
-
-      // refresh latest stock
+      showToast(`${item.name} only has ${latest.stock_kg} KG left`);
       loadMangoes();
-
       return;
     }
   }
@@ -259,8 +220,7 @@ async function placeOrder() {
   );
 
   const totalPrice = items.reduce(
-    (sum, item) =>
-      sum + (item.quantity * item.price_per_kg),
+    (sum, item) => sum + (item.quantity * item.price_per_kg),
     0
   );
 
@@ -291,18 +251,12 @@ async function placeOrder() {
 
   for (const item of items) {
 
-    const latest = latestStock.find(
-      m => m.id === item.id
-    );
-
-    const newStock =
-      latest.stock_kg - item.quantity;
+    const latest = latestStock.find(m => m.id === item.id);
+    const newStock = latest.stock_kg - item.quantity;
 
     await supabaseClient
       .from('mango_stock')
-      .update({
-        stock_kg: newStock
-      })
+      .update({ stock_kg: newStock })
       .eq('id', item.id);
   }
 
@@ -327,23 +281,14 @@ ${itemsText}
 `;
 
   try {
-
     await fetch(
       `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`,
       {
         method: 'POST',
-
-        headers: {
-          'Content-Type': 'application/json'
-        },
-
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: telegramMessage
-        })
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chat_id: CHAT_ID, text: telegramMessage })
       }
     );
-
   } catch (err) {
     console.error(err);
   }
@@ -352,7 +297,7 @@ ${itemsText}
   // RESET
   // =============================
 
-  showToast("Order placed successfully");
+  showToast("Order placed successfully! 🥭");
 
   Object.keys(cart).forEach(k => delete cart[k]);
 
@@ -369,11 +314,9 @@ ${itemsText}
 
 function showToast(msg) {
 
-  const toast =
-    document.getElementById('toast');
+  const toast = document.getElementById('toast');
 
   toast.innerText = msg;
-
   toast.style.display = 'block';
 
   setTimeout(() => {
